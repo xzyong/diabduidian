@@ -1,0 +1,81 @@
+{__NOLAYOUT__}
+
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>点对点商城-微信扫码支付</title>
+	<!-- Bootstrap -->
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="__PUBLIC__/pc/css/my-style.css">
+</head>
+<body>
+
+			<script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js"></script>
+<div class="settlement pay-success">
+	<div class="top-banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-2">
+					<img class="logo" src="__PUBLIC__/pc/img/member_logo.png" alt="">
+				</div>
+				<div class="col-sm-10 hidden-xs">
+					<div class="stepflex" id="#sflex03">
+						<dl class="first done">
+							<dt class="s-num">1</dt>
+							<dd class="s-text">1.我的购物车</dd>
+						</dl>
+						<dl class="normal doing">
+							<dt class="s-num">2</dt>
+							<dd class="s-text">2.填写核对订单信息<s></s><b></b></dd>
+						</dl>
+						<dl class="normal last">
+							<dt class="s-num">3</dt>
+							<dd class="s-text">3.成功提交订单<s></s><b></b></dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<img alt="模式二扫码支付" src="http://paysdk.weixin.qq.com/example/qrcode.php?data=<?php echo urlencode($url);?>" style="width:150px;height:150px;"/>
+<!--<p>{$trade_no}</p>-->
+</body>
+<script>
+	$(function(){
+		window.setInterval(function(){
+			$.post(
+					"{:url('/get_order_status')}",
+					{
+						out_trade_no:"{$trade_no}"
+					},
+					function(d) {
+						if (d == 2) {
+							alert('付款成功');
+							window.location.href = "{:url('index/Member/recharge')}";
+						} else {
+							if(d!=3){
+								alert('付款成功');
+								window.location.href = d;
+							}
+
+						}
+					}
+			);
+		}, 2000);
+	});
+</script>
+</html>
