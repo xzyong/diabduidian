@@ -26,14 +26,35 @@ class Exshop extends HomeBase
 		$this->assign('banner',Db::name('ads_items')->where('ad_id',6)->select());
 		//轮播图实例化
 		
-		$this->assign('cate',Db::name('category')->where('pid',0)->select());
+		$class=$this->getTree();
+		$this->assign('class',$class);
 		//分类列表
 		
 		$this->assign('cat',osc_goods()->get_category_goods(37));
-		$this->assign('list',Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("goods_id desc")->limit(6)->select());
+		//统计当前兑换劵数量
+		
+		$this->assign('list',$test=Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("goods_id desc")->limit(6)->select());
+		//查询兑换所需积分>=1和
+		
 		$this->assign('SEO',['title'=>config('SITE_TITLE'),'keywords'=>config('SITE_KEYWORDS'),'description'=>config('SITE_DESCRIPTION')]);
 		
+		
 		return $this->fetch();
-   
+		
     }
+	
+	public function getTree($pid=0){
+	//分类查询函数
+		$list=Db::name('category')->where("pid=".$pid)->select();
+		if($list){
+			foreach($list as $k=>$v){
+				$list[$k]['child']=$this->getTree($v['id']);
+				
+			}
+			
+		}
+		return $list;
+	}
+	
+	
 }
