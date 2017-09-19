@@ -45,7 +45,7 @@ class Login extends Base{
 				//验证密码
 				
 				if(think_ucenter_encrypt($data['password'],config('PWD_KEY'))==$user_info['passwd']){
-					
+					//将加密后的密码解析后进行判断是否为输入的密码
 					$group=Db::name('auth_group_access')->where('uid',$user_info['admin_id'])->find();
 					
 			        $auth = array(

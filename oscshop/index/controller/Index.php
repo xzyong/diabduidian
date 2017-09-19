@@ -37,6 +37,7 @@ class Index extends HomeBase
 		$this->assign('empty', '~~暂无数据');
 
         $this->assign('list1',$this->sel('0',4,'goods_id'));
+		
         $this->assign('list4',$this->sell(4));
         $this->assign('list2',Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("goods_id desc")->limit(8)->select());
         $this->assign('list3',Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("viewed desc")->limit(4)->select());
