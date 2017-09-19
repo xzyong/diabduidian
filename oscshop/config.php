@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 return [
 	/***********框架系统配置*************/
 	//'app_trace' =>  true,
-	'app_debug' => false,
+	'app_debug' => true,
 	'app_namespace' =>  'osc',	
 	'default_module'=> 'index',
     'url_route_on' => true,
