@@ -68,7 +68,7 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input name="username" value="{$Think.cookie.admin['username']}" type="text" class="form-control" />
+															<input name="username" value="{$Think.cookie.admin['username']}" type="text" class="form-control" placeholder="用户名" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
@@ -91,7 +91,7 @@
 														<button type="submit" class="login-btn width-35 pull-right btn btn-sm btn-primary">
 															<i class="fa fa-key"></i>
 															登录
-														</button>
+														</button>									
 														<div class="check-tips" style="color:red;"></div>
 													</div>
 
@@ -144,12 +144,10 @@
     				window.location.href = data.url;
     			} else {
     				self.find(".check-tips").text(data.msg);
-
-  			}
+				}
     		}
     	});
-
-	
+		
     </script>
 	</body>
 </html>
