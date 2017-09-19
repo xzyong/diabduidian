@@ -66,7 +66,7 @@
                         <!--<li><a href="#"><i class="fa fa-heart"></i> APP下载</a></li>-->
                     </ul>
                 </div>
-
+				<?php //echo $banner;?>
                 <div class="col-md-4 col-sm-4">
                     <div class="header-right">
                         <ul style="box-sizing: inherit;">
@@ -816,20 +816,23 @@
         </div>
 
         <div class="category-layer category-layer1">
-
+			<!-- 全部商品分类 -->
             <span class="category-layer-bg"></span>
 
 
+		
 
 
 
-           {volist name='cate' id="ca"}
+		   <!-- 一级循环开始 -->
+			<?php foreach($class as $k=>$v){?>
             <div class="list">
                 <dl class="cat">
                     <dt class="cat-name">
                         <i class="iconfont"></i>
-
-                        <a href="{:url('Exproduct/index','id='.$ca.id)}" target="_blank" title="{$ca.name}">{$ca.name}</a>
+						
+                        <a href="" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
+						
 
                     </dt>
                     <i class="right-arrow">&gt;</i>
@@ -842,21 +845,20 @@
 
                             <dl class="fore1">
                                 <dt style="width: 2em;">
-                                    <a href="{:url('Exproduct/index','id='.$ca.id)}" target="_blank" title="{$ca.name}">
-                                        <em>{$ca.name}</em>
+                                    <a href="" target="_blank" title="<?php echo $v['name'];?>">
+                                        <em><?php echo $v['name'];?></em>
                                         <i>&gt;</i>
                                     </a>
                                 </dt>
+								<!--二级循环开始-->
+								<?php foreach($v['child'] as $vo){?>
                                 <dd>
-                                    {volist name="cat" id="categ"}
-                                    {if condition="$ca.id eq $categ.pid"}
-                                    <a href="{:url('Exproduct/index','id='.$categ.id)}" target="_blank" title="{$categ.name}">{$categ.name}</a>
-                                    {/if}
-                                    {/volist}
-
-
+                                    <a href="" target="_blank" title="<?php echo $vo['name'];?>"><?php echo $vo['name'];?></a>
+									
 
                                 </dd>
+								<?php }?>
+								<!--END-->
                             </dl>
 
 
@@ -882,14 +884,13 @@
                 </div>
             </div>
 
-            {/volist}
-
-
+			<?php }?>
+           <!--END-->
 
         </div>
 
         <!-- 带有二级分类的分类导航 _start -->
-
+			
         <!-- 带有二级分类的分类导航 _end -->
     </div>
 </div>
@@ -967,9 +968,9 @@
             {volist name="list" id="lis"}
                 <div class="col-md-4 col-sm-6 col-xs-6">
                     <div class="list">
-                        <a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><img src="IMG_ROOT{$lis['image']|resize=360,360}" alt=""></a>
+                        <a href=""><img src="IMG_ROOT{$lis['image']|resize=360,360}" alt=""></a>
                     </div>
-                    <a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><h2 class="title">{$lis.name}</h2></a>
+                    <a href=""><h2 class="title">{$lis.name}</h2></a>
                     <p><inr>{$lis.pay_points} </inr> 张兑换券 <span>剩余{$lis.quantity}</span></p>
                 </div>
             {/volist}
