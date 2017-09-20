@@ -6,7 +6,7 @@ return [
    
     'database'    => 'ocshop',   
     'username'    => 'root',    
-    'password'    => 'root',    
+    'password'    => 'wes199410.',    
     'hostport'    => '3306',    
     'params'      => [],   
     'charset'     => 'utf8',    
