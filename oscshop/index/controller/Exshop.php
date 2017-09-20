@@ -34,7 +34,7 @@ class Exshop extends HomeBase
 		//统计当前兑换劵数量
 		
 		$this->assign('list',$test=Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("goods_id desc")->limit(6)->select());
-		//查询兑换所需积分>=1和
+		//查询兑换所需积分>=1
 		
 		$this->assign('SEO',['title'=>config('SITE_TITLE'),'keywords'=>config('SITE_KEYWORDS'),'description'=>config('SITE_DESCRIPTION')]);
 		
