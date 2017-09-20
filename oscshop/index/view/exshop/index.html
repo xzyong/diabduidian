@@ -770,7 +770,6 @@
 					</a>
 				</div>
 				<div class="all-category fl" id="nav">
-
 					<ul>
 
 						<li class="fl">
@@ -795,16 +794,90 @@
 					</div>
 				</div>
 
-				<div class="category-layer category-layer1">
-					<!-- 全部商品分类 -->
-					<span class="category-layer-bg"></span>
-					<div class="list">
-						<ul>
-							<li>入会商品<i class="layui-ico" style="width: 10px;height: 10px;color: white;">&#xe602;</li>
-							<li>兑换商品</li>
-						</ul>	
-					</div>
-				</div>
+				 <div class="category-layer category-layer1">
+			<!-- 全部商品分类 -->
+            <span class="category-layer-bg"></span>
+		   <!-- 一级循环开始 -->
+			<?php foreach($class as $k=>$v){?>
+            <div class="list">
+                <dl class="cat">
+                    <dt class="cat-name">
+                        <i class="iconfont"></i>
+						
+                        <a href="" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
+						
+
+                    </dt>
+                    <i class="right-arrow">&gt;</i>
+                </dl>
+                <div class="categorys">
+                    <div class="item-left fl">
+                        <!-- 推荐分类 -->
+                        <style>
+                        	.category-layer .list .categorys .subitems dt{
+                        		clear: both;
+                        		text-align: center;
+                        	}
+                        	.category-layer .list .categorys .subitems dt i{
+                        		vertical-align: middle;
+                        		top: auto;
+                        	}
+                        </style>
+                        <div class="subitems">
+
+                            <dl class="fore1">
+								<!--二级循环开始-->
+								<?php //foreach($v['child'] as $vo){?>
+                                <dt style="width: 2em;">
+                                    <a href="" target="_blank" title="<?php //echo $v['name'];?>">
+                                        <em><?php //echo $v['name'];?>123</em>
+                                        <i>&gt;</i>
+                                    </a>
+                                </dt>
+								<dt style="width: 2em;">
+                                    <a href="" target="_blank" title="<?php //echo $v['name'];?>">
+                                        <em><?php //echo $v['name'];?>3456</em>
+                                        <i>&gt;</i>
+                                    </a>
+                                </dt>
+								<dt style="width: 2em;">
+                                    <a href="" target="_blank" title="<?php //echo $v['name'];?>">
+                                        <em><?php //echo $v['name'];?>2355</em>
+                                        <i>&gt;</i>
+                                    </a>
+                                </dt>
+								<!--END-->
+								
+                                <dd>
+                                    <a href="" target="_blank" title="<?php //echo $vo['name'];?>"><?php //echo $vo['name'];?></a>
+									
+
+                                </dd>
+                            </dl>
+
+
+                        </div>
+                    </div>
+                    <div class="item-right fr">
+                        <!-- 品牌logo -->
+                        <div class="item-brands">
+                            <div class="brands-inner">
+
+                            </div>
+                        </div>
+                        <!-- 分类广告图片 -->
+                        <div class="item-promotions">
+                            <a href="javascript:;" target="_blank" class="img-link">
+                                <img src="__PUBLIC__/pc/img/14780725616003.png" width="180">
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+			<?php }?>
+           <!--END-->
+        </div>
 				<!-- 带有二级分类的分类导航 _start -->
 				<!-- 带有二级分类的分类导航 _end -->
 			</div>
