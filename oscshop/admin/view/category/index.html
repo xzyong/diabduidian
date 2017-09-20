@@ -27,16 +27,16 @@
 						<th>id</th> 		
 						<th>图片</th>		
 						<th>分类名称</th>
-						<th>pid</th>					
+						<th>所属分类</th>					
 						<th>操作</th>				
 					</tr>
 				</thead>
 				<tbody>
-					{volist name="list" id="cat" empty="$empty"}
+					<!-- {volist name="list" id="cat" empty="$empty"}
 					<tr>
 						<td>
 							{$cat.id}								
-						</td>
+						</td>zz
 						<td>
 							<a href="{:url('Category/index',array('pid'=>$cat['id']))}">
 								{if condition="$cat['image']"}
@@ -57,7 +57,35 @@
 							</a>
 						</td>
 					</tr>	
-					{/volist}
+					{/volist} -->
+					<?php foreach($list as $k=>$v){?>
+					<!-- 分类循环 -->
+					<tr>
+						<td>
+							<?php echo $k+1;?>							
+						</td><!-- 分类id -->
+						<td>
+							<a href="{:url('Category/index',array('pid'=>$v['id']))}">
+								<?php if(!empty($v['image'])){?>
+		                  			<img src="IMG_ROOT{$v.image|resize=50,50}" />
+			                  	<?php }else{?>
+			                  		<img src="__PUBLIC__/image/no_image_50x50.jpg" />
+			                  	<?php }?>
+		                  	</a>
+						</td>	<!-- 缩略图 -->
+						<td><?php echo $v['name'];?></td><!-- 分类名称 -->
+						<td><?php if(!empty($pid_name[$k][0])){echo $pid_name[$k][0]['name'];}else{echo '一级导航';};?></td><!-- 所属分类名 -->
+						<td>
+							<a  class="btn btn-xs btn-info" href='{:url("category/edit",array("id"=>$v["id"]))}'>
+								<i class="fa fa-edit bigger-120"></i>
+							</a> 
+							<a class="delete btn btn-xs btn-danger" href='{:url("category/del",array("id"=>$v["id"]))}' >
+								<i class="fa fa-trash bigger-120"></i>
+							</a>
+						</td><!-- 操作 -->
+					</tr>
+					<?php }?>
+					<!-- END -->
 					
 					<tr>
 						<td colspan="20" class="page">{$list->render()}</td>
