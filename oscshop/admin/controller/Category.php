@@ -33,22 +33,8 @@ class Category extends AdminBase{
 		// 	$pid=0;
 		// }
 		
-		$list = Db::name('category')->order('pid asc,id')->paginate(config('page_num'));
-		//分类列表查询语句
-		
-		
-		foreach($list as $k=>$v){
-			//查询单条数据中所属分类名
-			$pid=$v['pid'];
-			$pid=Db::name('category')->field('name')->order('pid asc,id')->where('id',$pid)->limit(1)->select();
-			$pid_name[$k]=$pid;
-		}
-		
-		
-		$this->assign('pid_name',$pid_name);
-		
+		$list = Db::name('category')->paginate(config('page_num'));
 		$this->assign('empty', '<tr><td colspan="20">~~暂无数据</td></tr>');
-		
 		$this->assign('list', $list);
 		
 		return $this->fetch();   
