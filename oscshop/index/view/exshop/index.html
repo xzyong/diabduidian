@@ -623,7 +623,7 @@
 							</div>
 							<div class="search-box">
 								<div class="search-box-con">
-									<input type="text" class="keyword search-box-input SZY-SEARCH-BOX-KEYWORD" name="name" tabindex="9" autocomplete="off" data-searchwords="乌骨鸡" placeholder="乌骨鸡" value="">
+									<input type="text" class="keyword search-box-input SZY-SEARCH-BOX-KEYWORD" name="name" tabindex="9" autocomplete="off" data-searchwords="{$search[0]['name']}" placeholder="{$search[0]['name']}" value="">
 								</div>
 							</div>
 							<input type="hidden" id="searchtype" name="search" value="1" class="searchtype">
@@ -775,7 +775,7 @@
 					<ul>
 
 						<li class="fl">
-							<a href="{:url('Exproduct/index','id=0')}" target="_blank">单券专区</a>
+							<a href="{:url('Exproduct/index','id=0')}">单券专区</a>
 
 							<!-- 导航小标签 _start -->
 
@@ -783,7 +783,7 @@
 						</li>
 
 						<li class="fl">
-							<a href="{:url('Exproduct/index','id=1')}" target="_blank">多券兑换</a>
+							<a href="{:url('Exproduct/index','id=1')}">多券兑换</a>
 
 							<!-- 导航小标签 _start -->
 
@@ -937,14 +937,10 @@
 <div style="height:20px; ">
     <hr/>
 </div>
-{include file="public/foot " /}
+{include file="public/foot" /}
 
 <!-- 第三方流量统计 -->
-<<<<<<< HEAD
-<div style="display: none; "><script src="__PUBLIC__/pc/img/z_stat.php " language="JavaScript "></script><script src="core.php " charset="utf-8 " type="text/javascript "></script><a href="http://www.cnzz.com/stat/website.php?web_id=1260852003 " target="_blank " title="站长统计 ">站长统计</a></div>
-=======
 <!-- <div style="display: none; "><script src="__PUBLIC__/pc/img/z_stat.php " language="JavaScript "></script><script src="core.php " charset="utf-8 " type="text/javascript "></script><a href="http://www.cnzz.com/stat/website.php?web_id=1260852003 " target="_blank " title="站长统计 ">站长统计</a></div> -->
->>>>>>> SQUAD
 <!-- 底部 _end-->
 
 <script src="__PUBLIC__/pc/js/jquery-1.10.2.js "></script>
