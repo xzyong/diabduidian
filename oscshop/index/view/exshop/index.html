@@ -158,11 +158,9 @@
 
 							</div>
 							<div role="tabpanel" class="tab-pane" id="dl_weixin"><iframe src="qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>
-<<<<<<< HEAD
-							<script src="js/wxLogin.js"></script>
-=======
+							
 							<script src="__PUBLIC__/pc/js/wxLogin.js"></script>
->>>>>>> SQUAD
+							
 							<script>
 								var obj = new WxLogin({
 									id: "dl_weixin",
@@ -842,8 +840,7 @@
 								<dd>
                                     <a href="" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
                                 </dd> 
-								<?php }?>                         
->>>>>>> SQUAD
+								<?php }?>
                             </dl>
 							<?php }?>
 							<!--END--> 
@@ -883,18 +880,10 @@
 				<ul id="fullScreenSlides" class="full-screen-slides">
 					{volist name='banner' id="ba" key=$key} {if condition="$key eq 0"}
 					<li style="display: none; background: url(IMG_ROOT{$ba.image_url|resize=1920,400}) 50% 50%;">
-<<<<<<< HEAD
-
-						{else/}
-						<li style="background: url(IMG_ROOT{$ba.image_url|resize=1920,400}) 50% 50%;">
-							{/if}
-							<a href=# " target="_blank " title=" ">&nbsp;</a>
-=======
 						{else/}
 						<li style="background: url(IMG_ROOT{$ba.image_url|resize=1920,400}) 50% 50%;">
 							{/if}
 							<a href="" target="_blank " title=" ">&nbsp;</a>
->>>>>>> SQUAD
             </li>
             {/volist}
         </ul>
@@ -932,11 +921,7 @@
             {volist name="list " id="lis "}
                 <div class="col-md-4 col-sm-6 col-xs-6 ">
                     <div class="list ">
-<<<<<<< HEAD
-                        <a href=" "><img src="IMG_ROOT{$lis[ 'image']|resize=360,360} " alt=" "></a>
-=======
-                        <a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><img src="IMG_ROOT{$lis[ 'image']|resize=360,360} " alt=" "></a>
->>>>>>> SQUAD
+                        <a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><img src="IMG_ROOT{$lis[ 'image']|resize=360,360}" alt=" "></a>
                     </div>
                     <a href=" "><h2 class="title ">{$lis.name}</h2></a>
                     <p><inr>{$lis.pay_points} </inr> 张兑换券 <span>剩余{$lis.quantity}</span></p>
