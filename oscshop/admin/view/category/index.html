@@ -36,7 +36,7 @@
 					<tr>
 						<td>
 							{$cat.id}								
-						</td>zz
+						</td>
 						<td>
 							<a href="{:url('Category/index',array('pid'=>$cat['id']))}">
 								{if condition="$cat['image']"}
@@ -65,7 +65,42 @@
 					<tr>
 						<td colspan="20">总计 {$list->total()|default="0"} 个分类</td>
 					</tr>	
-				</tbody>
+				</tbody>-->
+					
+					<!-- 分离循环 -->
+					<?php foreach($list as $k=>$v){?>
+					<tr>
+						<td>
+							<?php echo $k+1;?>							
+						</td>		<!-- 分类ID -->
+						<td>
+							<a href="{:url('Category/index',array('pid'=>$v['id']))}">
+								<?php if(!empty($v['image'])){?>
+		                  			<img src="IMG_ROOT{$v.image|resize=50,50}" />
+			                  	<?php }else{?>
+			                  		<img src="__PUBLIC__/image/no_image_50x50.jpg" />
+			                  	<?php }?>
+		                  	</a>
+						</td>	<!-- 缩略图 -->
+						<td><?php echo $v['name'];?></td>	<!-- 分类名称 -->
+						<td><?php if(!empty($pid_name[$k][0])){echo $pid_name[$k][0]['name'];}else{echo $pid_name[$k][0]['name']}?></td><!-- 所属分类 -->
+						<td>
+							<a  class="btn btn-xs btn-info" href='{:url("category/edit",array("id"=>$v["id"]))}'>
+								<i class="fa fa-edit bigger-120"></i>
+							</a> 
+							<a class="delete btn btn-xs btn-danger" href='{:url("category/del",array("id"=>$v["id"]))}' >
+								<i class="fa fa-trash bigger-120"></i>
+							</a>
+						</td>					<!-- 操作 -->
+					</tr>
+					
+					<tr>
+						<td colspan="20" class="page">{$list->render()}</td>			<!-- 分页 -->
+					</tr>
+					<tr>
+						<td colspan="20">总计 {$list->total()|default="0"} 个分类</td>	<!-- 合计 -->
+					</tr>
+				
 				
 			</table>
 		</div>
