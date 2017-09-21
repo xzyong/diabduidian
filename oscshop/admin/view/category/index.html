@@ -27,16 +27,16 @@
 						<th>id</th> 		
 						<th>图片</th>		
 						<th>分类名称</th>
-						<th>pid</th>					
+						<th>所属分类</th>					
 						<th>操作</th>				
 					</tr>
 				</thead>
 				<tbody>
-					{volist name="list" id="cat" empty="$empty"}
+					<!-- {volist name="list" id="cat" empty="$empty"}
 					<tr>
 						<td>
 							{$cat.id}								
-						</td>
+						</td>zz
 						<td>
 							<a href="{:url('Category/index',array('pid'=>$cat['id']))}">
 								{if condition="$cat['image']"}

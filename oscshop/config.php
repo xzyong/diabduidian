@@ -15,6 +15,7 @@ return [
     'view_replace_str'=>[
 	    '__PUBLIC__'=>'/public/static',
 	    '__IMAGE__'=>'/public/uploads/images',
+	    '__UPLOADS__'=>'/public/uploads/',
 	    '__RES__'=>'/public/static/view_res',
 	    '__ADMIN__' =>'/public/static/view_res/admin',
 	    'IMG_ROOT'=>'/'
