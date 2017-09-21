@@ -69,12 +69,12 @@ class Login extends MobileBase{
 			}
 	}
 	public function user_login(){
+	//验证登录方式
 		$this->assign('SEO',['title'=>'登录方式']);
 		return $this->fetch();
 	}
 	
  	function login(){
-	
 		if(request()->isPost()){
 			$data=input('post.');
 
@@ -123,7 +123,7 @@ class Login extends MobileBase{
 	}
 
 	function reg(){
-	
+	//注册账号
 		if(request()->isPost()){
 
 			$data=input('post.');
