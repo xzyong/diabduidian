@@ -158,7 +158,9 @@
 
 							</div>
 							<div role="tabpanel" class="tab-pane" id="dl_weixin"><iframe src="qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>
+							
 							<script src="__PUBLIC__/pc/js/wxLogin.js"></script>
+							
 							<script>
 								var obj = new WxLogin({
 									id: "dl_weixin",
@@ -621,7 +623,7 @@
 							</div>
 							<div class="search-box">
 								<div class="search-box-con">
-									<input type="text" class="keyword search-box-input SZY-SEARCH-BOX-KEYWORD" name="name" tabindex="9" autocomplete="off" data-searchwords="乌骨鸡" placeholder="乌骨鸡" value="">
+									<input type="text" class="keyword search-box-input SZY-SEARCH-BOX-KEYWORD" name="name" tabindex="9" autocomplete="off" data-searchwords="{$search[0]['name']}" placeholder="{$search[0]['name']}" value="">
 								</div>
 							</div>
 							<input type="hidden" id="searchtype" name="search" value="1" class="searchtype">
@@ -773,7 +775,7 @@
 					<ul>
 
 						<li class="fl">
-							<a href="{:url('Exproduct/index','id=0')}" target="_blank">单券专区</a>
+							<a href="{:url('Exproduct/index','id=0')}">单券专区</a>
 
 							<!-- 导航小标签 _start -->
 
@@ -781,7 +783,7 @@
 						</li>
 
 						<li class="fl">
-							<a href="{:url('Exproduct/index','id=1')}" target="_blank">多券兑换</a>
+							<a href="{:url('Exproduct/index','id=1')}">多券兑换</a>
 
 							<!-- 导航小标签 _start -->
 
@@ -838,7 +840,7 @@
 								<dd>
                                     <a href="" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
                                 </dd> 
-								<?php }?>                         
+								<?php }?>
                             </dl>
 							<?php }?>
 							<!--END--> 
@@ -919,7 +921,7 @@
             {volist name="list " id="lis "}
                 <div class="col-md-4 col-sm-6 col-xs-6 ">
                     <div class="list ">
-                        <a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><img src="IMG_ROOT{$lis[ 'image']|resize=360,360} " alt=" "></a>
+                        <a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><img src="IMG_ROOT{$lis[ 'image']|resize=360,360}" alt=" "></a>
                     </div>
                     <a href=" "><h2 class="title ">{$lis.name}</h2></a>
                     <p><inr>{$lis.pay_points} </inr> 张兑换券 <span>剩余{$lis.quantity}</span></p>
@@ -935,7 +937,7 @@
 <div style="height:20px; ">
     <hr/>
 </div>
-{include file="public/foot " /}
+{include file="public/foot" /}
 
 <!-- 第三方流量统计 -->
 <!-- <div style="display: none; "><script src="__PUBLIC__/pc/img/z_stat.php " language="JavaScript "></script><script src="core.php " charset="utf-8 " type="text/javascript "></script><a href="http://www.cnzz.com/stat/website.php?web_id=1260852003 " target="_blank " title="站长统计 ">站长统计</a></div> -->

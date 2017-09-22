@@ -41,7 +41,9 @@ class Index extends HomeBase
         $this->assign('list4',$this->sell(4));
         $this->assign('list2',Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("goods_id desc")->limit(8)->select());
         $this->assign('list3',Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("viewed desc")->limit(4)->select());
-        $this->assign('banner',Db::name('ads_items')->where('ad_id',4)->select());
+        $this->assign('banner',Db::name('ads_items')->where('ad_id',1)->select());
+		#轮播查询ad_id为1的图片
+		
 		$this->assign('SEO',['title'=>config('SITE_TITLE'),'keywords'=>config('SITE_KEYWORDS'),'description'=>config('SITE_DESCRIPTION')]);
 		
 		return $this->fetch();

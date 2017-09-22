@@ -14,14 +14,19 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
+		<!-- 轮播 -->
         {volist name='banner' id="ba" key=$key}
         {if condition="$key eq 1"}
             <div class="item active">
-                <img src="IMG_ROOT{$ba.image_url|resize=1920,400}" alt="...">
+				<a href="<?php echo $banner[$key]['link_url'];?>">
+					<img src="IMG_ROOT{$ba.image_url|resize=1920,400}" alt="...">
+				</a>
             </div>
         {else/}
             <div class="item">
-                <img src="IMG_ROOT{$ba.image_url|resize=1920,400}" alt="...">
+				<a href="<?php echo $banner[$key]['link_url'];?>">
+					<img src="IMG_ROOT{$ba.image_url|resize=1920,400}" alt="...">
+				</a>
             </div>
         {/if}
         {/volist}    
