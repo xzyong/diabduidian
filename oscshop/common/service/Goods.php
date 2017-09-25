@@ -319,7 +319,8 @@ static function get_recommend_arr($type=1,$num=6,$attr=5){
 		return $list ;
 	}
 	public function moretickect($where,$order,$num){
-		$list=Db::name('goods')->where('pay_points',$where, 1)->where('is_points_goods',1)->order($order)->paginate($num);
+		//					是否为多劵	按什么排序	分页数
+		$list=Db::name('goods')->where('pay_points',$where, 1)->where('is_points_goods',1)->order($order)->where('status',1)->paginate($num);
 		return $list ;
 	}
 
