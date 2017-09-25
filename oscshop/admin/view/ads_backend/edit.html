@@ -32,7 +32,7 @@
 
 								 <tr id="gallery-image-row{$i-1}">
 									 <td class="text-left"><a href="#" id="thumb-image{$i-1}" data-toggle="image" class="img-thumbnail"><img src="/{:resize($v['image_url'],100,100)}"   alt="img" /></a><input type="hidden" name="goods_image[{$i-1}][image_url]" value="{$v['image_url']}" id="input-image{$i-1}" /></td>
-									 <td class="text-right"><input type="text" name="goods_image[{$i-1}][link_url]" value="{$v['link_url']}" placeholder="若不跳转请为空" class="form-control" /></td>
+									 <td class="text-right"><input type="text" name="goods_image[{$i-1}][link_url]" value="{$v['link_url']}" placeholder="地址可为空，请使用‘http://’或‘https://’作为前缀" class="form-control" /></td>
 									 <td class="text-left">
 										 <input type="hidden" name="table" value="ads_items" />
 

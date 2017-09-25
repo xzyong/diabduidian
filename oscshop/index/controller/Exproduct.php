@@ -22,10 +22,11 @@ class Exproduct extends HomeBase
 {
 
     public function search(){
+		//搜索
         if (input('param.search') && input('param.name')) {
             $name = input('name');
             $query=[];
-            $query['name']=$name ;
+            $query['name']=$name;
             $query['search']=input('search') ;
             $list = Db::name('goods')
                 ->where('name', 'like', "%$name%")
@@ -37,7 +38,7 @@ class Exproduct extends HomeBase
             $this->assign('mun', count($list));
             $this->assign('page', $list->render());
             $this->assign('empty', '<div class="list-content" style="width: 500px; height: 500px">暂时没有该产品的信息</div>');
-            $this->assign('goodlist', $list);
+            $this->assign('goodlist', $list);	//				1
             $this->assign('ptitle', '混合搜索');
             $this->assign('SEO', ['title' => '兑换商品列表 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
             return $this->fetch();
@@ -154,20 +155,16 @@ class Exproduct extends HomeBase
             switch (input('param.id')) {
                 case 0:
                     $list = osc_goods()->moretickect('in', 'goods_id desc', 8);
-
+					//?查询符合条件的商品
                     $this->assign('cate', '');
                     $this->assign('father', '');
-
                     $this->assign('ptitle', '单券专区');
-
                     $this->assign('SEO', ['title' => '单券专区 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
                     break;
                 case 1:
                     $list = osc_goods()->moretickect('not in', 'goods_id desc', 8);
-
                     $this->assign('father', '');
                     $this->assign('cate', '');
-
                     $this->assign('SEO', ['title' => '多券专区 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
                     $this->assign('ptitle', '多券专区');
                     break;
@@ -189,7 +186,6 @@ class Exproduct extends HomeBase
 
                         }
                         $list = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.goods_id desc', 8, $lis);
-
                         $this->assign('ptitle', $title['name']);
 
                         $this->assign('cate', $goods);
@@ -208,7 +204,8 @@ class Exproduct extends HomeBase
         $this->assign('mun', count($list));
         $this->assign('page', $list->render());
         $this->assign('empty', '<div class="list-content" style="width: 500px; height: 500px">暂时没有该产品的信息</div>');
-        $this->assign('goodlist', $list);
+        $this->assign('goodlist', $list);	//			2
+			//dump($list);die;
         return $this->fetch();
     }
 
@@ -314,7 +311,7 @@ class Exproduct extends HomeBase
         $this->assign('SEO', ['title' => '入会商品列表 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
 
         $this->assign('empty', '<div class="list-content" style="width: 500px; height: 500px">暂时没有该产品的信息</div>');
-        $this->assign('goodlist', $lis);
+        $this->assign('goodlist', $lis);	//     3
         return $this->fetch();
     }
 
