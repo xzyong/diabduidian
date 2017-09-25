@@ -132,12 +132,23 @@
 <script type="text/javascript">
     $(function(){
         $('#text_left').click(function(e){
+        	if($('.list2').show()){
+        	$('.list2').hide();
+        	}
             $('.list').toggle();
             e.stopPropagation();
             $('body').click(function(){
                 $('.list').hide();
             })
         })
+        $('#text_left2').click(function(){
+        	$('.list2').toggle();
+        	e.stopPropagation();
+            $('body').click(function(){
+                $('.list2').hide();
+            }) ;        
+        })
+        
         $('.list li').click(function(){
             $('#text_left').text(($(this).text()));
             $('#text_left').parent().addClass('active').siblings().removeClass('active');
