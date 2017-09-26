@@ -32,6 +32,7 @@ class Exproduct extends HomeBase
                 ->where('name', 'like', "%$name%")
                 ->where(['status'=>1,'is_points_goods'=> 1])
                 ->paginate(8,false,['query'=>$query]);
+			//dump(Db::name('goods')->getLastSql());die;
             $this->assign('cate', '');
             $this->assign('father', '');
             $this->assign('id', input('param.id'));
