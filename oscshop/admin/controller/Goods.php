@@ -30,8 +30,9 @@ class Goods extends AdminBase{
         
 		if(isset($filter['type'])&&$filter['type']=='search'){
 			$list=osc_goods()->get_category_goods_list($filter,config('page_num'),0);
+			
 		}else{
-			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(config('page_num'));
+			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(config('page_num'));dump(Db::name('goods')->getLastSql());die;
 		}		
 
 		$this->assign('empty','<tr><td colspan="20">没有数据~</td></tr>');

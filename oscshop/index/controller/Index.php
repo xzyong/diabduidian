@@ -34,7 +34,12 @@ class Index extends HomeBase
 //            dump(input('param.states'));
             $this->assign('states',input('param.states'));
         }
+		
+		$category=Db::name('category')->where('pid',0)->where('name','商品入会')->field('id')->select();
+		
 		$this->assign('empty', '~~暂无数据');
+		
+		$this->assign('category',$category);
 		
         $this->assign('list1',$this->sel('0',4,'sort_order'));
 		//限时特价查询语句

@@ -70,7 +70,7 @@ class CustomGoods extends GoodsBase{
 
 			$data['postage'] = $data['postage']==''?null:$data['postage'];
 			
-			$return=$model->add_goods($data);		
+			$return=$model->where('12',12)->add_goods($data);		
 			
 			if($return){
 
