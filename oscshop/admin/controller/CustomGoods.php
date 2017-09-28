@@ -104,6 +104,17 @@ class CustomGoods extends GoodsBase{
 	 //商品基本信息
 	 public function edit_general(){
 	 	
+		$results = osc_goods()->get_category_tree();
+		$json=[];
+		foreach ($results as $result) {
+			
+				if ($result['pid']!==0 && $result['pid']!==37) {
+					$json[] = array(
+					'category_id' => $result['id'],
+					'name'        => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+					);	
+				}
+		}
 		if(request()->isPost()){
 			
 			$data=input('post.');
@@ -131,6 +142,7 @@ class CustomGoods extends GoodsBase{
 			
 		}
 		
+		$this->assign('category',$json);
 		$this->assign('weight_class',Db::name('WeightClass')->select());
 		$this->assign('length_class',Db::name('LengthClass')->select());
 		$this->assign('description',Db::name('goods_description')->where('goods_id',(int)input('id'))->find());

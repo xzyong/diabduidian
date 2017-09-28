@@ -326,9 +326,11 @@ class Exproduct extends HomeBase
 
 //兑换商品详情
     public function details()
-    {
-
-
+    {	
+		$id=input('param.id');
+		$status=Db::name('goods')->where('goods_id',$id)->field('status')->find();
+		//dump($status);die;
+    	if($status['status']==1){
         if (!$list = osc_goods()->get_goods_info((int)input('param.id'))) {
             $this->error('商品不存在！！');
         }
@@ -352,7 +354,9 @@ class Exproduct extends HomeBase
 //        dump($list['goods']);die;
 //            dump(resize($list['goods']['image'],100,100));die;
         return $this->fetch();
-
+		}else{
+			$this->error('非常抱歉，您访问的商品已下架，您可以查看其它商品，给您带来不便非常抱歉。');
+		}
     }
 
 //添加评论

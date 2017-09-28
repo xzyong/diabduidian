@@ -19,8 +19,12 @@ use think\Db;
 class Goods extends HomeBase
 {
     public function index()
-    {    
-    	
+    {   
+		$id=input('param.id');
+		$status=Db::name('goods')->where('goods_id',$id)->field('status')->find();
+		//dump($status);die;
+    	if($status['status']==1){
+			
 		 if(!$list=osc_goods()->get_goods_info((int)input('param.id'))){
 		 	$this->error('商品不存在！！');
 		 }
@@ -49,6 +53,9 @@ class Goods extends HomeBase
 		$this->assign('list4',$this->sell(4));
 		$this->assign('empty','&nbsp;&nbsp;&nbsp;&nbsp;暂时还没有人评论!');
 		return $this->fetch();
+		}else{
+			$this->error('非常抱歉，您访问的商品已下架，您可以查看其它商品，给您带来不便非常抱歉。');
+		}
     }
 
     public function ajaxIndex(){

@@ -26,13 +26,13 @@ class Account extends HomeBase{
 		}
 	}
 	//我的资料
-    public function profile(){	
+    public function profile(){
 
 		if(request()->isPost()){
 			$data=input('post.');
-
-
-			if (!empty(request()->file('userpic'))) {
+			$reques=request()->file('userpic');
+			
+			if (!empty($reques)) {
 				$file=request()->file('userpic');
 				$info = $file->rule('uniqid')->move( 'public/uploads/images/product');	
 				$member['userpic']=$info->getSaveName();

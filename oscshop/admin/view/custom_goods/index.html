@@ -58,7 +58,7 @@
 								<span class="lbl"></span>
 							</label>
 						</th>											
-						<th>ID</th> 
+						<th>商品ID</th> 
 						<th>图片</th> 
 						<th>商品名称</th>
 						<th>兑换券所需张数</th>
@@ -76,15 +76,15 @@
 								<input class="ace ids" type="checkbox" name="id[]" value="{$v.goods_id}"/>
 								<span class="lbl"></span>
 							</label>
-							</td>				
-							<td>{$v.goods_id}</td>
+							</td>					<!-- 复选框 -->
+							<td>{$v.goods_id}</td>	<!-- 商品ID -->
 							<td>
 								{if condition="$v['image']"}
 		                  			<img src="IMG_ROOT{$v.image|resize=50,50}" />
 			                  	{else /}
 			                  		<img src="__PUBLIC__/image/no_image_50x50.jpg" />
 			                  	{/if}
-							</td>
+							</td>					<!-- 图片 -->
 							<td>{$v.name} 
 								{if condition="$v['shipping'] eq 0"}
 								<span class="warning">免配送</span> 								
@@ -92,27 +92,27 @@
 								{if condition="$v['subtract'] eq 0"}
 								<span class="warning">不减库存</span> 								
 								{/if}
-							</td>
+							</td>					<!-- 商品名称 -->
 							<!--Lavender-->
 						
 							<!--Laverder-->
 							<td>
 								{$v.pay_points}
-							</td>
+							</td>					<!-- 兑换券所需张数 -->
 							
 							<td>							
 								<input name="quantity" type="text" size="2" class="quantity" goods_id='{$v.goods_id}' value="{$v.quantity}" />
-							</td>
+							</td>					<!-- 数量 -->
 							<td>
 								<input name="sort" type="text" size="1" class="sort" goods_id='{$v.goods_id}' value="{$v.sort_order}" />								
-							</td>
+							</td>					<!-- 排序 -->
 							<td>
 								{switch name="v.status"}
 									{case value="1"}<a href='{:url("CustomGoods/set_status",array("id"=>$v["goods_id"],"status"=>2))}'><span class="btn btn-xs btn-info"><i class="fa fa-unlock bigger-120"></i></span></a>{/case}
 									{case value="2"}<a href='{:url("CustomGoods/set_status",array("id"=>$v["goods_id"],"status"=>1))}'><span class="btn btn-xs btn-danger"><i class="fa fa-lock bigger-120"></i></span></a>{/case}
 								{/switch}
 							</td>
-							<td>
+							<td>					<!-- 状态 -->
 								
 								
 								<div class="btn-group">
@@ -146,7 +146,7 @@
 									<i class="fa fa-trash bigger-120"></i>
 								</a>
 								
-							</td>
+							</td>					<!-- 操作 -->
 						</tr>
 						{/volist}
 						<tr style="margin-top: 10px;margin-bottom: 10px">
