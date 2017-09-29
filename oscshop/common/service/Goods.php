@@ -105,6 +105,55 @@ class Goods{
 		->where($map)->order('g.goods_id desc')
 		->paginate($page_num,false,['query'=>$query]);
 	}
+	
+	public function goods_category_search($filter,$getTree){
+		
+			$where=[];
+			$query=[];
+			$array=[];
+			if(isset($filter['type'])){
+				$query['type']=urlencode($filter['type']);	
+			}
+			#查询名称
+			if(isset($filter['name'])){
+				$where['name']=['like',"%".$filter['name']."%"];
+				$query['name']=urlencode($filter['name']);	
+			}
+			#查询分类
+			if(isset($filter['category'])&&$filter['category']!=='all'){
+				foreach($getTree AS $v){
+					foreach($v['child'] as $vo){
+						if($vo['id']==$filter['category']){
+							foreach($vo['child'] as $vk=>$vi){
+								$array[$vk]=$vi['id'];
+							}
+						}
+					}
+				}
+				if($array){
+					$where['category_pid']=['in',implode(",",$array)];
+				}else{
+					$where['category_pid']=['eq',(int)$filter['category']];
+				}
+				
+				$query['category']=urlencode($filter['category']);	
+				
+			}else if(isset($filter['category'])&&$filter['category']=='all'){
+				
+				$where['category_pid']=['>=','0'];
+				$query['category']=urlencode($filter['category']);
+				
+			}
+			#是否启用
+			if(isset($filter['status'])){
+				$where['status']=['eq',(int)$filter['status']];
+				$query['status']=urlencode($filter['status']);
+			}else{
+				$where['status']=['in','1,2'];
+			}
+			return Db::name('goods')->where($where)->where('is_points_goods','1')->order('goods_id desc')->paginate(10,false,['query'=>$query]);
+			
+	}
 
 	/**
 	 * 根据条件取得商品列表
@@ -229,6 +278,17 @@ class Goods{
 		}	
 			
 		return $home_goods_category;
+	}
+	//将分类列表整理为数组
+	public function getTree($pid=0){
+		$list=Db::name('category')->where('pid='.$pid)->select();
+		if($list){
+			foreach($list as $k=>$v){
+				$list[$k]['child']=$this->getTree($v['id']);
+			}
+			
+		}
+		return $list;
 	}
 
 	//取得商品分类属性
