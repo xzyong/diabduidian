@@ -31,7 +31,8 @@ class CustomGoods extends GoodsBase{
 		$category=osc_goods()->getTree();
 		if(isset($filter['type'])&&$filter['type']=='search'){
 			//$list=osc_goods()->get_category_goods_list($filter,config('page_num'),1);
-			$list=osc_goods()->goods_category_search($filter,$category);
+			$is=1;
+			$list=osc_goods()->goods_category_search($filter,$category,$is);
 			
 		}else{
 			

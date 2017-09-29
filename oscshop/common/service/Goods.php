@@ -106,7 +106,7 @@ class Goods{
 		->paginate($page_num,false,['query'=>$query]);
 	}
 	
-	public function goods_category_search($filter,$getTree){
+	public function goods_category_search($filter,$getTree,$is){
 		
 			$where=[];
 			$query=[];
@@ -151,7 +151,7 @@ class Goods{
 			}else{
 				$where['status']=['in','1,2'];
 			}
-			return Db::name('goods')->where($where)->where('is_points_goods','1')->order('goods_id desc')->paginate(10,false,['query'=>$query]);
+			return Db::name('goods')->where($where)->where('is_points_goods',$is)->order('goods_id desc')->paginate(10,false,['query'=>$query]);
 			
 	}
 
