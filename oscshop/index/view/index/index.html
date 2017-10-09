@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="list-ruhui-box promo1">
-                        <a href="{:url('Exproduct/me_index','id=28')}">
+                        <a href="{:url('Exproduct/me_index','id='.$category[0]['id'])}">
                             <p><img src="__PUBLIC__/pc/img/icon-02.png" alt=""></p>
                             <p>会员尊享酒</p>
                         </a>
@@ -94,40 +94,23 @@
 
         <div class="list row">
             <div class="caption-style-4 ">
-
+				<?php foreach($list1 as $k=>$v){?>
                 <div class="col-md-6 col-sm-4 col-xs-4 wow bounceInLeft">
                     <div class="border">
                         <div class="list">
-                            <a href="{:url('/goods/'.$list1[0]['goods_id'])}"><img src="IMG_ROOT{$list1[0]['image']|resize=555,320}" alt=""></a>
+                            <a href="{:url('/goods/'.$v['goods_id'])}"><img src="IMG_ROOT{$v['image']|resize=555,320}" alt=""></a>
                         </div>
                     </div>
-                    <a href="{:url('/goods/'.$list1[0]['goods_id'])}"><h2 class="title">{$list1[0]['name']}</h2></a>
+                    <a href="{:url('/goods/'.$v['goods_id'])}"><h2 class="title">{$v['name']}</h2></a>
                     <p>
-                        <inr>秒杀价：￥{$list1[0]['price']}</inr>
-                        <span>剩余{$list1[0]['quantity']}</span></p>
+                        <inr>秒杀价：￥{$v['price']}</inr>
+                        <span>剩余{$v['quantity']}</span></p>
                     <div>
-                        <del>￥{$list1[0]['origin_price']}</del>
+                        <del>￥{$v['origin_price']}</del>
                     </div>
-                    <div class="Count-down"><span class="time">仅剩：</span><span class="lxftime" endtime="{$list1[0]['end_time']}"></span></div>
+                    <div class="Count-down"><span class="time">仅剩：</span><span class="lxftime" endtime="{$v['end_time']}"></span></div>
                 </div>
-                <div class="col-md-6 col-sm-4 col-xs-4 wow bounceInRight" >
-                    <div class="border">
-                        <div class="list">
-                            <a href="{:url('/goods/'.$list1[1]['goods_id'])}"><img src="IMG_ROOT{$list1[1]['image']|resize=555,320}" alt=""></a>
-                        </div>
-                    </div>
-                    <a href="{:url('/goods/'.$list1[1]['goods_id'])}"><h2 class="title">{$list1[1]['name']}</h2></a>
-                    <p>
-                        <inr>秒杀价：￥{$list1[1]['price']}</inr>
-                        <span>剩余{$list1[1]['quantity']}</span></p>
-                    <div>
-                        <del>￥{$list1[1]['origin_price']}</del>
-                    </div>
-                    <div class="Count-down"><span class="time">仅剩：</span><span class="lxftime" endtime="{$list1[1]['end_time']}"></span></div>
-                </div>
-
-               
-
+               <?php }?>
 
             </div>
            

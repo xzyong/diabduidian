@@ -28,17 +28,19 @@ class CommentBackend extends AdminBase{
 	public function index(){
 //		若有搜索参数就搜索
 		$filter=input('param.');
-		$where = 'parent_id=0';
-		if(isset($filter['search_status'])&&$filter['search_status']=='1') {
+		$where = 'parent_id>=0';
+		if(isset($filter['search_status'])&&$filter['search_status']=='1'){
 			$where .= ' and status=1';
 		}
-		elseif(isset($filter['search_status'])&&$filter['search_status']=='2') {
+		elseif(isset($filter['search_status'])&&$filter['search_status']=='2'){
 			$where .= ' and status!=1';
 		}
 		if(isset($filter['search_goods_id'])&&is_numeric($filter['search_goods_id'])){
 			$where .= ' and goods_id='.$filter['search_goods_id'];
 		}
 		$list = GoodsComment::where($where)->paginate(10,false, ['query' => $filter]);
+		//SELECT * FROM `osc_goods_comment` WHERE  (  parent_id=0 ) LIMIT 0,10
+			
 //		将评论的二级评论查询出来
 		$sub_commends = array();
 		foreach($list as $k=>$v){

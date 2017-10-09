@@ -35,15 +35,16 @@ class Category extends AdminBase{
 		
 		$list = Db::name('category')->order('pid asc,id')->paginate(config('page_num'));
 		//分类列表查询语句
-		
+		//dump($list);die;
 		
 		foreach($list as $k=>$v){
 			//查询单条数据中所属分类名
 			$pid=$v['pid'];
-			$pid=Db::name('category')->field('name')->order('pid asc,id')->where('id',$pid)->limit(1)->select();
+			$pid=Db::name('category')->field('name')->order('pid asc')->where('id',$pid)->limit(1)->select();
+			//dump(Db::name('category')->getLastSql());
 			$pid_name[$k]=$pid;
 		}
-		
+		//dump($pid_name);die;
 		
 		$this->assign('pid_name',$pid_name);
 		

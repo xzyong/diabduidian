@@ -22,9 +22,15 @@
                     {volist name='list' id='d'}
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3">
+							{if condition="($d.img.image=='')"}
                             <div class="in-logo">
-                                <img src="__IMAGE__/product/{$d.img}" alt="">
+                                <img src="__PUBLIC__/image/no_image_50x50.jpg" alt="">
                             </div>
+							{else}
+                            <div class="in-logo">
+                                <img src="__IMAGE__/product/{$d.img.image}" alt="">
+                            </div>
+							{/if}
                         </div>
                         <div class="col-xs-9 col-sm-9 col-md-9">
                             <h2 class="title">{$d.name}</h2>

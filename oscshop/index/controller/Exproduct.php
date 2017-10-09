@@ -22,22 +22,24 @@ class Exproduct extends HomeBase
 {
 
     public function search(){
+		//搜索
         if (input('param.search') && input('param.name')) {
             $name = input('name');
             $query=[];
-            $query['name']=$name ;
+            $query['name']=$name;
             $query['search']=input('search') ;
             $list = Db::name('goods')
                 ->where('name', 'like', "%$name%")
                 ->where(['status'=>1,'is_points_goods'=> 1])
                 ->paginate(8,false,['query'=>$query]);
+			//dump(Db::name('goods')->getLastSql());die;
             $this->assign('cate', '');
             $this->assign('father', '');
             $this->assign('id', input('param.id'));
             $this->assign('mun', count($list));
             $this->assign('page', $list->render());
             $this->assign('empty', '<div class="list-content" style="width: 500px; height: 500px">暂时没有该产品的信息</div>');
-            $this->assign('goodlist', $list);
+            $this->assign('goodlist', $list);	//				1
             $this->assign('ptitle', '混合搜索');
             $this->assign('SEO', ['title' => '兑换商品列表 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
             return $this->fetch();
@@ -48,9 +50,10 @@ class Exproduct extends HomeBase
     {
 
         if (request()->isPost()) {
+				//dump('q1');die;
             if (input('param.search') && input('param.name')) {
                 $name = input('name');
-                $query['name']=$name ;
+                $query['name']=$name;
                 $list = Db::name('goods')
                     ->where('name', 'like', "%$name%")
                     ->where(['status'=>1,'is_points_goods'=> 1])
@@ -62,10 +65,7 @@ class Exproduct extends HomeBase
                 $this->assign('SEO', ['title' => '兑换商品列表 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
             } else {
                 $id = input('param.id');
-
-
                 switch ($id) {
-
                     case 0:
                         switch (input('param.oid')) {
                             case 3:
@@ -79,12 +79,10 @@ class Exproduct extends HomeBase
                     case 1:
                         switch (input('param.oid')) {
                             case 1:
-
                                 $lis = osc_goods()->moretickect('not in', 'pay_points desc', 8);
                                 break;
                             case 2:
                                 $lis = osc_goods()->moretickect('not in', 'pay_points', 8);
-
                                 break;
                             case 3:
                                 $lis = osc_goods()->moretickect('not in', 'viewed desc', 8);
@@ -124,7 +122,7 @@ class Exproduct extends HomeBase
                             switch (input('param.oid')) {
                                 case 1:
                                     $lis = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.pay_points desc', 8, $li);
-
+									//dump($lis);die;
                                     break;
                                 case 2:
                                     $lis = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.pay_points', 8, $li);
@@ -136,6 +134,7 @@ class Exproduct extends HomeBase
                                     $lis = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.viewed', 8, $li);
                                     break;
                             }
+                        }
                         }
                         break;
                 }
@@ -149,25 +148,22 @@ class Exproduct extends HomeBase
                 }
                 return $list;
             }
-        }
         if(request()->isGet()){
             switch (input('param.id')) {
                 case 0:
                     $list = osc_goods()->moretickect('in', 'goods_id desc', 8);
-
+					//?查询符合条件的商品
                     $this->assign('cate', '');
                     $this->assign('father', '');
-
                     $this->assign('ptitle', '单券专区');
-
                     $this->assign('SEO', ['title' => '单券专区 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
+					//dump(Db::name('goods')->getLastSql());die;
                     break;
                 case 1:
                     $list = osc_goods()->moretickect('not in', 'goods_id desc', 8);
-
+								//dump(Db::name('goods')->getLastSql());
                     $this->assign('father', '');
                     $this->assign('cate', '');
-
                     $this->assign('SEO', ['title' => '多券专区 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
                     $this->assign('ptitle', '多券专区');
                     break;
@@ -176,7 +172,7 @@ class Exproduct extends HomeBase
                     $father = osc_goods()->get_category_father(input('param.id'));
                     $title = Db::name('category')->where('id', input('param.id'))->find();
                     $this->assign('SEO', ['title' => '兑换商品列表 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
-//                dump($father);die;
+
                     if (empty($goods)) {
                         $list = osc_goods()->getGoodslist(['a.status' => 1, 'w.category_id' => input('param.id')], 'a.goods_id desc', 8);
                         $this->assign('ptitle', $title['name']);
@@ -189,12 +185,10 @@ class Exproduct extends HomeBase
 
                         }
                         $list = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.goods_id desc', 8, $lis);
-
                         $this->assign('ptitle', $title['name']);
 
                         $this->assign('cate', $goods);
                         $this->assign('father', $father);
-
                     }
 
 
@@ -202,13 +196,17 @@ class Exproduct extends HomeBase
         }
 
 
-
-
+		
+		//dump(osc_goods()->getLastSql());die;
         $this->assign('id', input('param.id'));
         $this->assign('mun', count($list));
+		//合计
         $this->assign('page', $list->render());
+		//分页
         $this->assign('empty', '<div class="list-content" style="width: 500px; height: 500px">暂时没有该产品的信息</div>');
-        $this->assign('goodlist', $list);
+		//错误信息
+        $this->assign('goodlist', $list);	//			2
+			//dump($list);die;
         return $this->fetch();
     }
 
@@ -216,7 +214,9 @@ class Exproduct extends HomeBase
     public function me_index()
     {
         if (request()->isPost()) {
+				dump('123');die;
             if(input('post.search')&&input('post.name')){
+				//判断搜索
                 $name = input('post.name');
                 $list= Db::name('goods')
                     ->where('name', 'like', "%$name%")
@@ -232,7 +232,6 @@ class Exproduct extends HomeBase
                 if (input('param.id') && input('param.area_id')) {
                     switch (input('param.oid')) {
                         case 1:
-
                             $lis = osc_goods()->getGoodslist(['w.category_id' => input('param.id'), 'a.location' => input('param.area_id'), 'a.status' => 1,], 'a.origin_price desc', 2);
                             break;
                         case 2:
@@ -285,12 +284,13 @@ class Exproduct extends HomeBase
             $this->assign('ptitle', $title['name']);
         }
         if (input('param.id') ){
-            $title = Db::name('category')->where('id', input('param.id'))->find();
-            $list = osc_goods()->getGoodslist(['w.category_id' => input('param.id'), 'a.status' => 1,], 'a.goods_id desc', 8);
+            //$title = Db::name('category')->where('id', input('param.id'))->find();
+            //$list = osc_goods()->getGoodslist(['w.category_id' => input('param.id'), 'a.status' => 1,], 'a.goods_id desc', 8);
+			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(config('page_num'));
             $father = osc_goods()->get_category_father(input('param.id'));
             $this->assign('father', $father);
             $this->assign('cate', Db::name('goods_area')->select());
-            $this->assign('ptitle', $title['name']);
+            //$this->assign('ptitle', $title['name']);
         }
 
         $lis = array();
@@ -302,7 +302,11 @@ class Exproduct extends HomeBase
                 }
             }
         }
-
+		
+		
+		if((input('param.area_id'))){
+			dump(input('param.area_id'));
+		}
 
 
 //        dump($lis);die;
@@ -315,14 +319,18 @@ class Exproduct extends HomeBase
 
         $this->assign('empty', '<div class="list-content" style="width: 500px; height: 500px">暂时没有该产品的信息</div>');
         $this->assign('goodlist', $lis);
+		//入会商品
+		//dump($lis);die;
         return $this->fetch();
     }
 
 //兑换商品详情
     public function details()
-    {
-
-
+    {	
+		$id=input('param.id');
+		$status=Db::name('goods')->where('goods_id',$id)->field('status')->find();
+		//dump($status);die;
+    	if($status['status']==1){
         if (!$list = osc_goods()->get_goods_info((int)input('param.id'))) {
             $this->error('商品不存在！！');
         }
@@ -346,7 +354,9 @@ class Exproduct extends HomeBase
 //        dump($list['goods']);die;
 //            dump(resize($list['goods']['image'],100,100));die;
         return $this->fetch();
-
+		}else{
+			$this->error('非常抱歉，您访问的商品已下架，您可以查看其它商品，给您带来不便非常抱歉。');
+		}
     }
 
 //添加评论

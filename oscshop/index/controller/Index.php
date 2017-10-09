@@ -34,16 +34,21 @@ class Index extends HomeBase
 //            dump(input('param.states'));
             $this->assign('states',input('param.states'));
         }
+		
+		$category=Db::name('category')->where('pid',0)->where('name','商品入会')->field('id')->select();
+		
 		$this->assign('empty', '~~暂无数据');
-
-        $this->assign('list1',$this->sel('0',4,'goods_id'));
+		
+		$this->assign('category',$category);
+		
+        $this->assign('list1',$this->sel('0',4,'sort_order'));
+		//限时特价查询语句
 		
         $this->assign('list4',$this->sell(4));
         $this->assign('list2',Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("goods_id desc")->limit(8)->select());
         $this->assign('list3',Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order("viewed desc")->limit(4)->select());
         $this->assign('banner',Db::name('ads_items')->where('ad_id',1)->select());
 		#轮播查询ad_id为1的图片
-		
 		$this->assign('SEO',['title'=>config('SITE_TITLE'),'keywords'=>config('SITE_KEYWORDS'),'description'=>config('SITE_DESCRIPTION')]);
 		
 		return $this->fetch();
@@ -63,7 +68,10 @@ class Index extends HomeBase
 
 
     public function sel($is_points_goods,$num,$con){
-       $list= Db::name('goods')->where('end_time','>',date('Y-m-d,H-i-s'))->where(['is_points_goods'=>$is_points_goods,'status'=>1])->order("$con desc")->limit($num)->select();
+	//					是否为兑换商品	查询数	按...排序
+       $list= Db::name('goods')->where('end_time','>',date('Y-m-d,H-i-s'))->where(['is_points_goods'=>$is_points_goods,'status'=>1])->order("$con asc")->limit($num)->select();
+	   //查询'goods'数据表信息，条件：秒杀时间大于当前时间、不是积分兑换商品、为上架商品
+	   
        if ($is_points_goods==0) {
           foreach ($list as $key => $v) {
            $list[$key]['end_time']=strtotime($v['end_time'])*1000;

@@ -83,7 +83,7 @@
 		                  	</a>
 						</td>	<!-- 缩略图 -->
 						<td><?php echo $v['name'];?></td>	<!-- 分类名称 -->
-						<td><?php if(!empty($pid_name[$k][0])){echo $pid_name[$k][0]['name'];}else{echo $pid_name[$k][0]['name']}?></td><!-- 所属分类 -->
+						<td><?php if(!empty($pid_name[$k][0])){echo $pid_name[$k][0]['name'];}else{echo '一级分类';}?></td><!-- 所属分类 -->
 						<td>
 							<a  class="btn btn-xs btn-info" href='{:url("category/edit",array("id"=>$v["id"]))}'>
 								<i class="fa fa-edit bigger-120"></i>
@@ -93,7 +93,7 @@
 							</a>
 						</td>					<!-- 操作 -->
 					</tr>
-					
+					<?php }?>
 					<tr>
 						<td colspan="20" class="page">{$list->render()}</td>			<!-- 分页 -->
 					</tr>

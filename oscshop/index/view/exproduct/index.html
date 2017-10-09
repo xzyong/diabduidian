@@ -46,12 +46,11 @@
                         </ul>
                     </li>
 
-
                 </ul>
 
 
         </div>
-
+					<!---------------------- 产品重复循环  start -------------------->	
         <div class="list-content">
             <div id="list" class="row">
                 {volist name="goodlist" id="li" empty="$empty"}
@@ -80,7 +79,7 @@
                 </div>
                 {/volist}
 
-                <!----------------------产品重复循环  END-------------------->
+                <!---------------------- 产品重复循环  END -------------------->
 
 
 
@@ -148,7 +147,6 @@
             $('#text_left').parent().addClass('active').siblings().removeClass('active');
             var url =window.location;
             var id = $(this).attr('data-id');
-
             $.post(
                 url,
                 {oid:id},
@@ -179,7 +177,6 @@
             $('#text_left2').parent().addClass('active').siblings().removeClass('active');
                 var url =window.location;
                 var id = $(this).attr('data-id');
-
                 $.post(
                         url,
                         {oid:id},

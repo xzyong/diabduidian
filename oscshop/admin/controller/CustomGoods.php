@@ -28,25 +28,30 @@ class CustomGoods extends GoodsBase{
 	public function index(){
 //		若有搜索参数就搜索
 		$filter=input('param.');
-        
+		$category=osc_goods()->getTree();
 		if(isset($filter['type'])&&$filter['type']=='search'){
-			$list=osc_goods()->get_category_goods_list($filter,config('page_num'),1);
+			//$list=osc_goods()->get_category_goods_list($filter,config('page_num'),1);
+			$is=1;
+			$list=osc_goods()->goods_category_search($filter,$category,$is);
+			
 		}else{
-			$list=Db::name('goods')->where('is_points_goods','1')->order('goods_id desc')->paginate(config('page_num'));
+			
+			//$list=Db::name('goods')->where('is_points_goods','1')->order('goods_id desc')->paginate(config('page_num'));
+			$list=Db::name('goods')->where('is_points_goods','1')->order('goods_id desc')->paginate(10);
+			
 		}
-		$category=	osc_goods()->get_category_tree();
-		$cate=[];
-		foreach ($category as $key => $v) {
+		//$cate=[];
+		//dump($category);
+		/* foreach ($category as $key => $v) {
 			if ($v['pid']!==0 && $v['pid']!==37) {
 				$cate[$key] = $v;
 			}
-		}
-		// dump($cate);die;		
-
+		} */
+			
+		//dump(Db::name('goods')->getLastSql());
 		$this->assign('empty','<tr><td colspan="20">没有数据~</td></tr>');
 		
-		$this->assign('category',$cate);
-		
+		$this->assign('category',$category);
 		$this->assign('list',$list);
 	
 		return $this->fetch();
@@ -70,7 +75,7 @@ class CustomGoods extends GoodsBase{
 
 			$data['postage'] = $data['postage']==''?null:$data['postage'];
 			
-			$return=$model->add_goods($data);		
+			$return=$model->where('12',12)->add_goods($data);		
 			
 			if($return){
 
@@ -104,10 +109,21 @@ class CustomGoods extends GoodsBase{
 	 //商品基本信息
 	 public function edit_general(){
 	 	
+		/* $results = osc_goods()->get_category_tree();
+		$json=[];
+		foreach ($results as $result) {
+			
+				if ($result['pid']!==0 && $result['pid']!==37) {
+					$json[] = array(
+					'category_id' => $result['id'],
+					'name'        => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+					);	
+				}
+		} */
+		$category=osc_goods()->getTree();
 		if(request()->isPost()){
 			
 			$data=input('post.');
-			
 			if(empty($data['name'])){
 		
 				$this->error('商品名称必填！');	
@@ -130,7 +146,13 @@ class CustomGoods extends GoodsBase{
 			}
 			
 		}
-		
+		if(input('id')){
+			$id=input('id');
+			$pid=Db::name('goods')->where('goods_id',$id)->field('category_pid')->find();
+			$pid=$pid['category_pid'];
+			$this->assign('pid',$pid);
+		}
+		$this->assign('category',$category);
 		$this->assign('weight_class',Db::name('WeightClass')->select());
 		$this->assign('length_class',Db::name('LengthClass')->select());
 		$this->assign('description',Db::name('goods_description')->where('goods_id',(int)input('id'))->find());
