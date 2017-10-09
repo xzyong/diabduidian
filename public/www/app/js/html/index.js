@@ -85,8 +85,8 @@ if(data.status==1){
 */
 
 
-}).error(function(){
-    aa = JSON.stringify(msg);
+}).error(function(e){
+    aa = JSON.stringify(e.msg);
 
 });
 

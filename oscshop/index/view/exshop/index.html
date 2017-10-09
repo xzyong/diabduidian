@@ -157,9 +157,9 @@
 
 							</div>
 							<div role="tabpanel" class="tab-pane" id="dl_weixin"><iframe src="qrconnect.html" frameborder="0" scrolling="no" width="300px" height="400px"></iframe></div>
-							
+
 							<script src="__PUBLIC__/pc/js/wxLogin.js"></script>
-							
+
 							<script>
 								var obj = new WxLogin({
 									id: "dl_weixin",
@@ -795,14 +795,14 @@
 					</div>
 				</div>
 
-				 <div class="category-layer category-layer1">
-			<!-- 全部商品分类 -->
-            <span class="category-layer-bg"></span>
-		   <!-- 一级循环开始 -->
-			<?php foreach($class as $k=>$v){?>
-            <div class="list">
-                <dl class="cat">
-                    <dt class="cat-name">
+				<div class="category-layer category-layer1">
+					<!-- 全部商品分类 -->
+					<span class="category-layer-bg"></span>
+					<!-- 一级循环开始 -->
+					<?php foreach($class as $k=>$v){?>
+					<div class="list">
+						<dl class="cat">
+							<dt class="cat-name">
                         <i class="iconfont"></i>
 						{if condition="($v['name']=='商品入会')"}
                         <a href="{:url('Exproduct/me_index',['id'=>$v['id']])}" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
@@ -810,80 +810,71 @@
 						<a href="{:url('Exproduct/index',['id'=>$v['id']])}" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
 						{/if}
                     </dt>
-                    <i class="right-arrow">&gt;</i>
-                </dl>
-                <div class="categorys">
-                    <div class="item-left fl">
-                        <!-- 推荐分类 -->
-                        <style>
-                        	.category-layer .list .categorys .subitems dt{
-                        		clear: both;
-                        		text-align: center;
-                        	}
-                        	.category-layer .list .categorys .subitems dt i{
-                        		vertical-align: middle;
-                        		top: auto;
-                        	}
-                        </style>
-                        <div class="subitems">
-							<!--二级循环开始-->
-							<?php foreach($v['child'] as $vo){?>
-                            <dl class="fore1">
-								{if condition="($v['name']=='商品入会')"}
-								<dt style="width: 2em;">
+							<i class="right-arrow">&gt;</i>
+						</dl>
+						<div class="categorys">
+							<div class="item-left fl">
+								<!-- 推荐分类 -->
+								<style>
+									.category-layer .list .categorys .subitems dt {
+										clear: both;
+										text-align: center;
+									}
+									
+									.category-layer .list .categorys .subitems dt i {
+										/*vertical-align: middle;*/
+										top: auto;
+									}
+								</style>
+								<div class="subitems">
+									<!--二级循环开始-->
+									<?php foreach($v['child'] as $vo){?>
+									<dl class="fore1" style="margin-top: 10px;">
+										{if condition="($v['name']=='商品入会')"}
+										<dt style="width: 2em;">
                                     <a href="{:url('Exproduct/me_index','id='.$v['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
                                         <em><?php echo $vo['name'];?></em>
                                         <i>&gt;</i>
                                     </a>
-                                </dt>
-								{else}
-                                <dt style="width: 2em;">
+                                </dt> {else}
+										<dt style="width: 2em;">
                                     <a href="{:url('Exproduct/index','id='.$v['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
                                         <em><?php echo $vo['name'];?></em>
                                         <i>&gt;</i>
                                     </a>
-                                </dt>
-								{/if}
-								<?php foreach($vo['child'] as $br){?>
-								{if condition="($v['name']=='商品入会')"}
-								<dd>
-                                    <a href="{:url('Exproduct/me_index','id='.$v['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
-                                </dd> 
-								{else}
-								<dd>
-                                    <a href="{:url('Exproduct/index','id='.$v['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
-                                </dd> 
-								{/if}
-								<?php }?>
-                            </dl>
-							<?php }?>
-							<!--END--> 
-
-
-                        </div>
-                    </div>
-					
-                    <div class="item-right fr">
-                        <!-- 品牌logo -->
-                        <div class="item-brands">
-                            <div class="brands-inner">
-
-                            </div>
-                        </div>
-                        <!-- 分类广告图片 -->
-						<?php foreach($v['child'] as $vo){?>
-                        <div class="item-promotions">
-                            <a href="javascript:;" target="_blank" class="img-link">
-                                <img src="__UPLOADS__/{$vo['image']}" width="180">
-                            </a>
-                        </div>
-						<?php }?>
-                    </div>
-                </div>
-            </div>
-			<?php }?>
-           <!--END-->
-        </div>
+                                </dt> {/if}
+										<?php foreach($vo['child'] as $br){?> {if condition="($v['name']=='商品入会')"}
+										<dd>
+											<a href="{:url('Exproduct/me_index','id='.$v['id'])}" target="_blank" title="<?php echo $br['name'];?>">
+												<?php echo $br['name'];?>
+											</a>
+										</dd>
+										{else}
+										<dd>
+											<a href="{:url('Exproduct/index','id='.$v['id'])}" target="_blank" title="<?php echo $br['name'];?>">
+												<?php echo $br['name'];?>
+											</a>
+										</dd>
+										{/if}
+										<?php }?>
+										<div class="item-right fr" style="text-align: right; float: right;">
+											<!-- 分类广告图片 -->
+											<div class="item-promotions">
+												<a href="javascript:;" target="_blank" class="img-link">
+													<img src="__UPLOADS__/{$vo['image']}" width="120px">
+												</a>
+											</div>
+										</div>
+									</dl>
+									<?php }?>
+									<!--END-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php }?>
+					<!--END-->
+				</div>
 				<!-- 带有二级分类的分类导航 _start -->
 				<!-- 带有二级分类的分类导航 _end -->
 			</div>
@@ -900,90 +891,90 @@
 						<li style="background: url(IMG_ROOT{$ba.image_url|resize=1920,400}) 50% 50%;">
 							{/if}
 							<a href="" target="_blank " title=" ">&nbsp;</a>
-            </li>
-            {/volist}
-        </ul>
+						</li>
+						{/volist}
+				</ul>
 
-        <ul class="full-screen-slides-pagination ">
-            {volist name='banner' id="ba " key=$key}
-            {if condition="$key eq 0 "}
-            <li class="current ">
+				<ul class="full-screen-slides-pagination ">
+					{volist name='banner' id="ba " key=$key} {if condition="$key eq 0 "}
+					<li class="current ">
 
-                {else/}
-            <li class=" ">
-                {/if}
-            <a href="javascript:void(0); ">{$key}</a>
-        </li>
-            {/volist}
-        </ul>
-        <!-- banner轮播 _end -->
-    </div>
-    <!-- banner模块 _end -->
-</div>
-    <!-- 楼层 _end -->
-    <!-- 默认缓载图片 -->
-    <!-- 前台首页楼层模板  -->
-    <!-- 判断url链接 -->
-    <!-- 楼层 _star -->
-    <!-- 楼层颜色 -->
-<div class="index-tuijian container ">
-    <div class="title ">
-        <h2>热门推荐</h2>
-    </div>
+						{else/}
+						<li class=" ">
+							{/if}
+							<a href="javascript:void(0); ">{$key}</a>
+						</li>
+						{/volist}
+				</ul>
+				<!-- banner轮播 _end -->
+			</div>
+			<!-- banner模块 _end -->
+		</div>
+		<!-- 楼层 _end -->
+		<!-- 默认缓载图片 -->
+		<!-- 前台首页楼层模板  -->
+		<!-- 判断url链接 -->
+		<!-- 楼层 _star -->
+		<!-- 楼层颜色 -->
+		<div class="index-tuijian container ">
+			<div class="title ">
+				<h2>热门推荐</h2>
+			</div>
 
-    <div class="list row ">
-        <div class="caption-style-4 ">
+			<div class="list row ">
+				<div class="caption-style-4 ">
 
-            {volist name="list " id="lis "}
-                <div class="col-md-4 col-sm-6 col-xs-6 ">
-                    <div class="list ">
-                        <a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><img src="IMG_ROOT{$lis[ 'image']|resize=360,360}" alt=" "></a>
-                    </div>
-                    <a href=" "><h2 class="title ">{$lis.name}</h2></a>
-                    <p><inr>{$lis.pay_points} </inr> 张兑换券 <span>剩余{$lis.quantity}</span></p>
-                </div>
-            {/volist}
-        </div>
-    </div>
-</div>
-<!-- 站点底部-->
-<!-- 右侧边栏 _end -->
+					{volist name="list " id="lis "}
+					<div class="col-md-4 col-sm-6 col-xs-6 ">
+						<div class="list ">
+							<a href="{:url('Exproduct/details','id='.$lis['goods_id'])}"><img src="IMG_ROOT{$lis[ 'image']|resize=360,360}" alt=" "></a>
+						</div>
+						<a href=" ">
+							<h2 class="title ">{$lis.name}</h2></a>
+						<p>
+							<inr>{$lis.pay_points} </inr> 张兑换券 <span>剩余{$lis.quantity}</span></p>
+					</div>
+					{/volist}
+				</div>
+			</div>
+		</div>
+		<!-- 站点底部-->
+		<!-- 右侧边栏 _end -->
 
-<!-- 底部 _start-->
-<div style="height:20px; ">
-    <hr/>
-</div>
-{include file="public/foot" /}
+		<!-- 底部 _start-->
+		<div style="height:20px; ">
+			<hr/>
+		</div>
+		{include file="public/foot" /}
 
-<!-- 第三方流量统计 -->
-<!-- <div style="display: none; "><script src="__PUBLIC__/pc/img/z_stat.php " language="JavaScript "></script><script src="core.php " charset="utf-8 " type="text/javascript "></script><a href="http://www.cnzz.com/stat/website.php?web_id=1260852003 " target="_blank " title="站长统计 ">站长统计</a></div> -->
-<!-- 底部 _end-->
+		<!-- 第三方流量统计 -->
+		<!-- <div style="display: none; "><script src="__PUBLIC__/pc/img/z_stat.php " language="JavaScript "></script><script src="core.php " charset="utf-8 " type="text/javascript "></script><a href="http://www.cnzz.com/stat/website.php?web_id=1260852003 " target="_blank " title="站长统计 ">站长统计</a></div> -->
+		<!-- 底部 _end-->
 
-<script src="__PUBLIC__/pc/js/jquery-1.10.2.js "></script>
-
-
-<script src="__PUBLIC__/pc/js/wow.min.js "></script>
-<script src="__PUBLIC__/pc/js/jquery.nav.js "></script>
-<script src="__PUBLIC__/pc/js/custom.js "></script>
-<!-- JS -->
-<!--[if lte IE 9]>
+		<script src="__PUBLIC__/pc/js/jquery-1.10.2.js "></script>
+		<script src="__PUBLIC__/pc/js/wow.min.js "></script>
+		<script src="__PUBLIC__/pc/js/jquery.nav.js "></script>
+		<!-- JS -->
+		<!--[if lte IE 9]>
 <script src="/js/requestAnimationFrame.js?v=20170511 "></script>
 <![endif]-->
-<script type="text/javascript ">
-    // 缓载图片
-    $().ready(function(){
-        $.cartbox.count = "0 ";
-        $.imgloading.loading();
-        //图片预加载
-        document.onreadystatechange = function() {
-            if (document.readyState == "complete ") {
-                $.imgloading.setting({
-                    threshold: 1000
-                });
-                $.imgloading.loading();
-            }
-        }
-    });
-</script>
+		<script src="__PUBLIC__/pc/js/custom.js "></script>
+		<script type="text/javascript ">
+			// 缓载图片
+			$().ready(function() {
+				$.cartbox.count = "0 ";
+				$.imgloading.loading();
+				//图片预加载
+				document.onreadystatechange = function() {
+					if(document.readyState == "complete ") {
+						$.imgloading.setting({
+							threshold: 1000
+						});
+						$.imgloading.loading();
+					}
+				}
+			});
+		</script>
+	</body>
 
-</body></html>
+</html>
