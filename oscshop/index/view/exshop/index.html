@@ -24,9 +24,9 @@
 		<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Font Awesome -->
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-		<link href="__PUBLIC__/pc/css/font-awesome.min.css" rel="stylesheet">
+		<!--<link href="__PUBLIC__/pc/css/font-awesome.min.css" rel="stylesheet">-->
 		<link rel="stylesheet" href="__PUBLIC__/pc/css/my-style.css">
-		<link rel="stylesheet" href="__PUBLIC__/pc/css/iconfont.css">
+		<!--<link rel="stylesheet" href="__PUBLIC__/pc/css/iconfont.css">-->
 		<link rel="stylesheet" href="__PUBLIC__/pc/css/common.css">
 		<!--整站改色 _start-->
 		<link rel="stylesheet" href="__PUBLIC__/pc/css/site-color-style-0.css">
@@ -35,8 +35,7 @@
 		<script src="__PUBLIC__/pc/js/common.js"></script>
 		<!-- 图片缓载js -->
 		<script src="__PUBLIC__/pc/js/jquery.lazyload.js"></script>
-
-		<link rel="stylesheet" href="__PUBLIC__/pc/css/layer.css" id="layuicss-skinlayercss">
+		<link rel="stylesheet" href="__PUBLIC__/pc/css/layer.css" id="layuicss-skinlayercss">	
 	</head>
 
 	<body>
@@ -278,7 +277,6 @@
 									<input type="tel" class="form-control" id="recommender" placeholder="请输入推荐人用户ID" style="box-sizing: inherit;">
 								</div>
 							</div>
-
 						</div>
 						<div class="modal-footer">
 							<button type="button" id="bild" class="btn btn-primary zhece"> 确定</button>
@@ -751,13 +749,6 @@
 		<!-- #nav_region_end -->
 		<!--页面css/js-->
 		<link rel="stylesheet" href="__PUBLIC__/pc/css/index.css">
-		<script src="__PUBLIC__/pc/js/index.js"></script>
-		<script src="__PUBLIC__/pc/js/tabs.js"></script>
-		<script src="__PUBLIC__/pc/js/bubbleup.js"></script>
-		<script src="__PUBLIC__/pc/js/jquery.hiSlider.js"></script>
-		<script src="__PUBLIC__/pc/js/index_tab.js"></script>
-		<script src="__PUBLIC__/pc/js/jump.js"></script>
-		<script src="__PUBLIC__/pc/js/nav.js"></script>
 
 		<div style="height:20px;"></div>
 		<!-- 判断url链接 -->
@@ -950,19 +941,21 @@
 		<!-- 第三方流量统计 -->
 		<!-- <div style="display: none; "><script src="__PUBLIC__/pc/img/z_stat.php " language="JavaScript "></script><script src="core.php " charset="utf-8 " type="text/javascript "></script><a href="http://www.cnzz.com/stat/website.php?web_id=1260852003 " target="_blank " title="站长统计 ">站长统计</a></div> -->
 		<!-- 底部 _end-->
-
-		<script src="__PUBLIC__/pc/js/jquery-1.10.2.js "></script>
+		<script src="__PUBLIC__/pc/js/index.js"></script>
+		<script src="__PUBLIC__/pc/js/tabs.js"></script>
+		<script src="__PUBLIC__/pc/js/bubbleup.js"></script>
+		<script src="__PUBLIC__/pc/js/jquery.hiSlider.js"></script>
+		<script src="__PUBLIC__/pc/js/index_tab.js"></script>
+		<script src="__PUBLIC__/pc/js/jump.js"></script>
+		<script src="__PUBLIC__/pc/js/nav.js"></script>
 		<script src="__PUBLIC__/pc/js/wow.min.js "></script>
+		<script src="__PUBLIC__/pc/js/jquery-1.10.2.js "></script>
 		<script src="__PUBLIC__/pc/js/jquery.nav.js "></script>
-		<!-- JS -->
-		<!--[if lte IE 9]>
-<script src="/js/requestAnimationFrame.js?v=20170511 "></script>
-<![endif]-->
 		<script src="__PUBLIC__/pc/js/custom.js "></script>
 		<script type="text/javascript ">
 			// 缓载图片
 			$().ready(function() {
-				$.cartbox.count = "0 ";
+				$.cartbox.count = "0";
 				$.imgloading.loading();
 				//图片预加载
 				document.onreadystatechange = function() {
@@ -975,6 +968,10 @@
 				}
 			});
 		</script>
+		<!-- JS -->
+		<!--[if lte IE 9]>
+			<script src="/js/requestAnimationFrame.js?v=20170511 "></script>
+		<![endif]-->
 	</body>
 
 </html>
