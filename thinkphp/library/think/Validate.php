@@ -486,7 +486,7 @@ class Validate
      */
     protected function is($value, $rule, $data = [])
     {
-        switch ($rule) {
+        switch ($rule){
             case 'require':
                 // 必须
                 $result = !empty($value) || '0' == $value;
@@ -1147,9 +1147,9 @@ class Validate
      * 获取验证规则的错误提示信息
      * @access protected
      * @param string    $attribute  字段英文名
-     * @param string    $title  字段描述名
-     * @param string    $type  验证规则名称
-     * @param mixed     $rule  验证规则数据
+     * @param string    $title  	字段描述名
+     * @param string    $type		验证规则名称
+     * @param mixed     $rule		验证规则数据
      * @return string
      */
     protected function getRuleMsg($attribute, $title, $type, $rule)

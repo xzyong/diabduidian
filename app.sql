@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 年 10 月 09 日 01:55
+-- 生成日期: 2017 年 10 月 10 日 01:15
 -- 服务器版本: 5.5.53
 -- PHP 版本: 5.4.45
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `osc_admin` (
 
 INSERT INTO `osc_admin` (`admin_id`, `user_name`, `passwd`, `true_name`, `telephone`, `email`, `login_count`, `last_login_ip`, `last_ip_region`, `create_time`, `update_time`, `last_login_time`, `status`, `group_id`) VALUES
 (1, 'admin', 'MDAwMDAwMDAwMIW6fN8', '', '', 'admin@admin.com', 57, '127.0.0.1', '', 1486951601, 0, 1492922943, 1, 0),
-(4, 'winner', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 45, '127.0.0.1', '', 1490256589, 0, 1506740880, 1, 2),
+(4, 'winner', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 46, '127.0.0.1', '', 1490256589, 0, 1507598005, 1, 2),
 (5, 'ldw456', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 7, '113.97.233.146', '', 1490951867, 0, 1498460368, 1, 2);
 
 -- --------------------------------------------------------
@@ -6223,7 +6223,7 @@ CREATE TABLE IF NOT EXISTS `osc_user_action` (
   `info` varchar(255) NOT NULL COMMENT '行为描述',
   `add_time` int(10) NOT NULL COMMENT '加入时间',
   PRIMARY KEY (`ua_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户行为' AUTO_INCREMENT=1674 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户行为' AUTO_INCREMENT=1675 ;
 
 --
 -- 转存表中的数据 `osc_user_action`
@@ -7904,7 +7904,8 @@ INSERT INTO `osc_user_action` (`ua_id`, `user_id`, `uname`, `type`, `info`, `add
 (1670, 4, 'winner', '后台系统用户', '更新商品状态', 1506676493),
 (1671, 4, 'winner', '后台系统用户', '更新商品状态', 1506676860),
 (1672, 4, 'winner', '后台系统用户', '更新商品状态', 1506677152),
-(1673, 4, 'winner', '后台系统用户', '登录了后台系统', 1506740880);
+(1673, 4, 'winner', '后台系统用户', '登录了后台系统', 1506740880),
+(1674, 4, 'winner', '后台系统用户', '登录了后台系统', 1507598005);
 
 -- --------------------------------------------------------
 
