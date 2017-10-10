@@ -71,7 +71,6 @@
 								<!--<li><a href="#"><i class="fa fa-heart"></i> APP下载</a></li>-->
 							</ul>
 						</div>
-						<?php //echo $banner;?>
 						<div class="col-md-4 col-sm-4">
 							<div class="header-right">
 								<ul style="box-sizing: inherit;">
@@ -505,6 +504,12 @@
 					document.getElementById("checkbox_agre").className = "form-control"
 					document.getElementById("zc_xieyi").innerHTML = "";
 				}
+				/**
+				 * post方法提交注册信息
+				 * @telephone		注册手机
+				 * @code			验证码
+				 * @password		密码
+				*/
 				$.post(
 					"/member/Login/reg", {
 						telephone: zc_user,
@@ -519,8 +524,13 @@
 							window.location.reload();
 						}
 					}
-
 				)
+				/*$.ajax({
+					url:"oscshop/index/exshop",
+					data:{},
+				})*/
+				
+				
 			}
 		</script>
 		<div class="header-area">
@@ -805,10 +815,11 @@
                 <dl class="cat">
                     <dt class="cat-name">
                         <i class="iconfont"></i>
-						
-                        <a href="" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
-						
-
+						{if condition="($v['name']=='商品入会')"}
+                        <a href="{:url('Exproduct/me_index',['id'=>$v['id']])}" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
+						{else}
+						<a href="{:url('Exproduct/index',['id'=>$v['id']])}" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
+						{/if}
                     </dt>
                     <i class="right-arrow">&gt;</i>
                 </dl>
@@ -829,17 +840,31 @@
 							<!--二级循环开始-->
 							<?php foreach($v['child'] as $vo){?>
                             <dl class="fore1">
-								
-                                <dt style="width: 2em;">
-                                    <a href="" target="_blank" title="<?php echo $vo['name'];?>">
+								{if condition="($v['name']=='商品入会')"}
+								<dt style="width: 2em;">
+                                    <a href="{:url('Exproduct/me_index','id='.$vo['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
                                         <em><?php echo $vo['name'];?></em>
                                         <i>&gt;</i>
                                     </a>
                                 </dt>
+								{else}
+                                <dt style="width: 2em;">
+                                    <a href="{:url('Exproduct/index','id='.$vo['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
+                                        <em><?php echo $vo['name'];?></em>
+                                        <i>&gt;</i>
+                                    </a>
+                                </dt>
+								{/if}
 								<?php foreach($vo['child'] as $br){?>
+								{if condition="($v['name']=='商品入会')"}
 								<dd>
-                                    <a href="" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
+                                    <a href="{:url('Exproduct/me_index','id='.$br['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
                                 </dd> 
+								{else}
+								<dd>
+                                    <a href="{:url('Exproduct/index','id='.$br['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
+                                </dd> 
+								{/if}
 								<?php }?>
                             </dl>
 							<?php }?>
@@ -848,6 +873,7 @@
 
                         </div>
                     </div>
+					
                     <div class="item-right fr">
                         <!-- 品牌logo -->
                         <div class="item-brands">
@@ -856,12 +882,13 @@
                             </div>
                         </div>
                         <!-- 分类广告图片 -->
+						<?php foreach($v['child'] as $vo){?>
                         <div class="item-promotions">
                             <a href="javascript:;" target="_blank" class="img-link">
-                                <img src="__PUBLIC__/pc/img/14780725616003.png" width="180">
+                                <img src="__UPLOADS__/{$vo['image']}" width="180">
                             </a>
                         </div>
-
+						<?php }?>
                     </div>
                 </div>
             </div>

@@ -79,7 +79,15 @@ class Login extends Base
             if (true !== $result) {
                 return ['error' => $result];
             }
-
+			/**
+			 * @ password 密码 
+			 * @ username 账号
+			 * @ telephone 电话
+			 * @ groupid 
+			 * @ reg_type
+			 * @ regdate
+			 * @ lastdate
+			*/
             $member['password'] = think_ucenter_encrypt($data['password'], config('PWD_KEY'));
             $member['username'] = $data['telephone'];
             $member['telephone'] = $data['telephone'];

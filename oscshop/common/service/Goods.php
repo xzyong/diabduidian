@@ -105,6 +105,55 @@ class Goods{
 		->where($map)->order('g.goods_id desc')
 		->paginate($page_num,false,['query'=>$query]);
 	}
+	
+	public function goods_category_search($filter,$getTree,$is,$pad){
+		
+			$where=[];
+			$query=[];
+			$array=[];
+			if(isset($filter['type'])){
+				$query['type']=urlencode($filter['type']);	
+			}
+			#查询名称
+			if(isset($filter['name'])){
+				$where['name']=['like',"%".$filter['name']."%"];
+				$query['name']=urlencode($filter['name']);	
+			}
+			#查询分类
+			if(isset($filter['category'])&&$filter['category']!=='all'){
+				foreach($getTree AS $v){
+					foreach($v['child'] as $vo){
+						if($vo['id']==$filter['category']){
+							foreach($vo['child'] as $vk=>$vi){
+								$array[$vk]=$vi['id'];
+							}
+						}
+					}
+				}
+				if($array){
+					$where['category_pid']=['in',implode(",",$array)];
+				}else{
+					$where['category_pid']=['eq',(int)$filter['category']];
+				}
+				
+				$query['category']=urlencode($filter['category']);	
+				
+			}else if(isset($filter['category'])&&$filter['category']=='all'){
+				
+				$where['category_pid']=['>=','0'];
+				$query['category']=urlencode($filter['category']);
+				
+			}
+			#是否启用
+			if(isset($filter['status'])){
+				$where['status']=['eq',(int)$filter['status']];
+				$query['status']=urlencode($filter['status']);
+			}else{
+				$where['status']=['in','1,2'];
+			}
+			return Db::name('goods')->where($where)->where('is_points_goods',$is)->order('goods_id desc')->paginate($pad,false,['query'=>$query]);
+			
+	}
 
 	/**
 	 * 根据条件取得商品列表
@@ -230,6 +279,17 @@ class Goods{
 			
 		return $home_goods_category;
 	}
+	//将分类列表整理为数组
+	public function getTree($pid=0){
+		$list=Db::name('category')->where('pid='.$pid)->select();
+		if($list){
+			foreach($list as $k=>$v){
+				$list[$k]['child']=$this->getTree($v['id']);
+			}
+			
+		}
+		return $list;
+	}
 
 	//取得商品分类属性
 	public function get_category_attribute($cid){
@@ -310,16 +370,18 @@ static function get_recommend_arr($type=1,$num=6,$attr=5){
 	}
 
 	public function getGoodslists($where,$order,$num,$lis){
-		$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where('w.category_id','in',$lis)->where($where)->order($order)->paginate($num);
+		//$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where('w.category_id','in',$lis)->where($where)->order($order)->paginate($num);
+		$list=   Db::name('goods')->where('category_pid','in',$lis)->where($where)->order($order)->paginate($num);
 		return $list ;
 	}
 
 	public function getGoodslist($where,$order,$num){
-		$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where($where)->order($order)->paginate($num);
+		$list=   Db::name('goods')->where($where)->order($order)->paginate($num);
 		return $list ;
 	}
 	public function moretickect($where,$order,$num){
-		$list=Db::name('goods')->where('pay_points',$where, 1)->where('is_points_goods',1)->order($order)->paginate($num);
+		//					是否为多劵	按什么排序	分页数
+		$list=Db::name('goods')->where('pay_points',$where, 1)->where('is_points_goods',1)->order($order)->where('status',1)->paginate($num);
 		return $list ;
 	}
 

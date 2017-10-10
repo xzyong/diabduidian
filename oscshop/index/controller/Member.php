@@ -111,16 +111,18 @@ class Member extends 	HomeBase{
 		$list=Db::name('product')->where('uid',member('uid'))->order('id desc')->paginate(config('page_num'));
 
 		$lis=array();
+		//dump($list);die;
 		foreach ($list as $k => $v) {
 			$lis[$k]=$v;
 			$img = Db::name('product_image')->field('image')->where('pid',$v['id'])->find();
 			
-			foreach ($img as $key => $value) {
+			$lis[$k]['img']=$img;
+			/* foreach ($img as $key => $value) {
 				$lis[$k]['img']=$value;
-			}
+			} */
 			
 		}
-		// dump($lis);
+		// dump($lis);die;
 		$this->assign('list',$lis);
 		$this->assign('SEO',['title'=>'兑换记录-'.config('SITE_URL').'-'.config('SITE_TITLE')]);
 		$this->assign('page',$list->render());

@@ -27,11 +27,15 @@ class Goods extends AdminBase{
     public function index(){
     	
 		$filter=input('param.');
-        
+        $category=osc_goods()->getTree();
 		if(isset($filter['type'])&&$filter['type']=='search'){
-			$list=osc_goods()->get_category_goods_list($filter,config('page_num'),0);
+			//$list=osc_goods()->get_category_goods_list($filter,config('page_num'),0);
+			$is=0;
+			$list=osc_goods()->goods_category_search($filter,$category,$is);
+			
 		}else{
-			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(config('page_num'));
+			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(10);
+			//dump(Db::name('goods')->getLastSql());die;
 		}		
 
 		$this->assign('empty','<tr><td colspan="20">没有数据~</td></tr>');
@@ -111,8 +115,8 @@ class Goods extends AdminBase{
 		$this->assign('weight_class',Db::name('WeightClass')->select());
 		$this->assign('length_class',Db::name('LengthClass')->select());
 		$this->assign('description',Db::name('goods_description')->where('goods_id',(int)input('id'))->find());
-	 	$this->assign('goods',Db::view(['Goods','o'],'*')->view('GoodsToCategory','category_id','GoodsToCategory.goods_id=o.goods_id')->where('o.goods_id',input('param.id'))->find());
-		
+	 	//$this->assign('goods',Db::view(['Goods','o'],'*')->view('GoodsToCategory','category_id','GoodsToCategory.goods_id=o.goods_id')->where('o.goods_id',input('param.id'))->find());
+		$this->assign('goods',Db::name('goods')->where('goods_id',input('param.id'))->find());
 	 	$this->assign('crumbs', '编辑基本信息');	
 		
 	 	return $this->fetch('general');

@@ -1,6 +1,6 @@
 <div class="all-nav-box">
     <div class="container">
-        <a href="{:url('Index/index')}">首页</a>
+        <a href="{:url('Exshop/index')}">兑换商城</a>
         {volist name="father" id="fa"}
         &gt; {$fa.name}
        {/volist}
@@ -46,12 +46,11 @@
                         </ul>
                     </li>
 
-
                 </ul>
 
 
         </div>
-
+					<!---------------------- 产品重复循环  start -------------------->	
         <div class="list-content">
             <div id="list" class="row">
                 {volist name="goodlist" id="li" empty="$empty"}
@@ -80,7 +79,7 @@
                 </div>
                 {/volist}
 
-                <!----------------------产品重复循环  END-------------------->
+                <!---------------------- 产品重复循环  END -------------------->
 
 
 
@@ -148,7 +147,6 @@
             $('#text_left').parent().addClass('active').siblings().removeClass('active');
             var url =window.location;
             var id = $(this).attr('data-id');
-
             $.post(
                 url,
                 {oid:id},
@@ -179,14 +177,14 @@
             $('#text_left2').parent().addClass('active').siblings().removeClass('active');
                 var url =window.location;
                 var id = $(this).attr('data-id');
-
+				//alert(id);
                 $.post(
                         url,
                         {oid:id},
                         function(d) {
-
+							
                             var len = d.length;
-
+							
                             l= '';
                             for (var i = 0; i <= len; i++) {
                                 l+= '<div class="col-sm-3 col-xs-6"><div class="lis-box"><div class="img-list"><a href="'+d[i]['url']+'"> <img src="/'+d[i]['image']+'" alt=""></a></div><h3 class="title"><a href="'+d[i]['url']+'">' + d[i]['name'] + '</a></h3><p class="money"> ' + d[i]['pay_points'] + '张兑换券</p><div class="button"><div class="row"><div class="col-xs-6" ><a href="javascript:add('+d[i]['goods_id']+')"   type="button"  class="btn btn-danger btn-sm btn-lg btn-block">加入购物车</a></div><div class="col-xs-6"><a href="javascript:save('+d[i]['goods_id']+')" type="button" class="btn btn-default btn-sm btn-lg btn-block">收藏商品</a></div></div></div></div></div>';

@@ -43,7 +43,7 @@
 
             </ul>
         </div>
-
+		
         <div class="list-content">
             <div class="row">
                 {volist name="goodlist" id="li" empty="$empty"}
@@ -55,14 +55,11 @@
                         <h3 class="title">
                             <a href="{:url('/goods/'.$li['goods_id'])}"> {$li.name}</a>
                         </h3>
-                        <p class="money">
-                            {if condition="($li.end_time == NULL)"}
-                            ￥{$li.origin_price}
-                            {elseif condition="($li.end_time eq 1) "}
-                            ￥{$li.origin_price}
-                            {else/}
+						<p class="money">
                             ￥{$li.price}
-                            {/if}
+                        </p>
+                        <p class="money" style="color:#999;">
+                            ￥{$li.origin_price}
                         </p>
                         <div class="button">
                             <div class="row">
@@ -154,7 +151,6 @@
             $('#text_left').parent().addClass('active').siblings().removeClass('active');
             var url =window.location;
             var id = $(this).attr('data-id');
-
             $.post(
                     url,
                     {oid:id},
@@ -185,20 +181,19 @@
             $('#text_left2').parent().addClass('active').siblings().removeClass('active');
             var url =window.location;
             var id = $(this).attr('data-id');
-
             $.post(
                     url,
                     {oid:id},
                     function(d) {
 
                         var len = d.length;
-
+						
                         l= '';
                         for (var i = 0; i <= len; i++) {
                             l+= '<div class="col-sm-3 col-xs-6"><div class="lis-box"><div class="img-list"><a href="'+d[i]['url']+'"> <img src="/'+d[i]['image']+'" alt=""></a></div><h3 class="title"><a href="'+d[i]['url']+'">' + d[i]['name'] + '</a></h3><p class="money"> ' + d[i]['pay_points'] + '张兑换券</p><div class="button"><div class="row"><div class="col-xs-6" ><a href="javascript:add('+d[i]['goods_id']+')"   type="button"  class="btn btn-danger btn-sm btn-lg btn-block">加入购物车</a></div><div class="col-xs-6"><a href="javascript:save('+d[i]['goods_id']+')" type="button" class="btn btn-default btn-sm btn-lg btn-block">收藏商品</a></div></div></div></div></div>';
                             $('#list').html(l);
                         }
-                    }
+                    },
             )
         })
 
