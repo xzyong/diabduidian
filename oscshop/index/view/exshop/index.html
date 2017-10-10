@@ -504,6 +504,12 @@
 					document.getElementById("checkbox_agre").className = "form-control"
 					document.getElementById("zc_xieyi").innerHTML = "";
 				}
+				/**
+				 * post方法提交注册信息
+				 * @telephone		注册手机
+				 * @code			验证码
+				 * @password		密码
+				*/
 				$.post(
 					"/member/Login/reg", {
 						telephone: zc_user,
@@ -518,8 +524,13 @@
 							window.location.reload();
 						}
 					}
-
 				)
+				/*$.ajax({
+					url:"oscshop/index/exshop",
+					data:{},
+				})*/
+				
+				
 			}
 		</script>
 		<div class="header-area">
@@ -831,14 +842,14 @@
                             <dl class="fore1">
 								{if condition="($v['name']=='商品入会')"}
 								<dt style="width: 2em;">
-                                    <a href="{:url('Exproduct/me_index','id='.$v['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
+                                    <a href="{:url('Exproduct/me_index','id='.$vo['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
                                         <em><?php echo $vo['name'];?></em>
                                         <i>&gt;</i>
                                     </a>
                                 </dt>
 								{else}
                                 <dt style="width: 2em;">
-                                    <a href="{:url('Exproduct/index','id='.$v['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
+                                    <a href="{:url('Exproduct/index','id='.$vo['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
                                         <em><?php echo $vo['name'];?></em>
                                         <i>&gt;</i>
                                     </a>
@@ -847,11 +858,11 @@
 								<?php foreach($vo['child'] as $br){?>
 								{if condition="($v['name']=='商品入会')"}
 								<dd>
-                                    <a href="{:url('Exproduct/me_index','id='.$v['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
+                                    <a href="{:url('Exproduct/me_index','id='.$br['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
                                 </dd> 
 								{else}
 								<dd>
-                                    <a href="{:url('Exproduct/index','id='.$v['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
+                                    <a href="{:url('Exproduct/index','id='.$br['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
                                 </dd> 
 								{/if}
 								<?php }?>

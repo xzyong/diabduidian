@@ -106,7 +106,7 @@ class Goods{
 		->paginate($page_num,false,['query'=>$query]);
 	}
 	
-	public function goods_category_search($filter,$getTree,$is){
+	public function goods_category_search($filter,$getTree,$is,$pad){
 		
 			$where=[];
 			$query=[];
@@ -151,7 +151,7 @@ class Goods{
 			}else{
 				$where['status']=['in','1,2'];
 			}
-			return Db::name('goods')->where($where)->where('is_points_goods',$is)->order('goods_id desc')->paginate(10,false,['query'=>$query]);
+			return Db::name('goods')->where($where)->where('is_points_goods',$is)->order('goods_id desc')->paginate($pad,false,['query'=>$query]);
 			
 	}
 
@@ -370,12 +370,13 @@ static function get_recommend_arr($type=1,$num=6,$attr=5){
 	}
 
 	public function getGoodslists($where,$order,$num,$lis){
-		$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where('w.category_id','in',$lis)->where($where)->order($order)->paginate($num);
+		//$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where('w.category_id','in',$lis)->where($where)->order($order)->paginate($num);
+		$list=   Db::name('goods')->where('category_pid','in',$lis)->where($where)->order($order)->paginate($num);
 		return $list ;
 	}
 
 	public function getGoodslist($where,$order,$num){
-		$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where($where)->order($order)->paginate($num);
+		$list=   Db::name('goods')->where($where)->order($order)->paginate($num);
 		return $list ;
 	}
 	public function moretickect($where,$order,$num){

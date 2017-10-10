@@ -115,8 +115,8 @@ class Goods extends AdminBase{
 		$this->assign('weight_class',Db::name('WeightClass')->select());
 		$this->assign('length_class',Db::name('LengthClass')->select());
 		$this->assign('description',Db::name('goods_description')->where('goods_id',(int)input('id'))->find());
-	 	$this->assign('goods',Db::view(['Goods','o'],'*')->view('GoodsToCategory','category_id','GoodsToCategory.goods_id=o.goods_id')->where('o.goods_id',input('param.id'))->find());
-		
+	 	//$this->assign('goods',Db::view(['Goods','o'],'*')->view('GoodsToCategory','category_id','GoodsToCategory.goods_id=o.goods_id')->where('o.goods_id',input('param.id'))->find());
+		$this->assign('goods',Db::name('goods')->where('goods_id',input('param.id'))->find());
 	 	$this->assign('crumbs', '编辑基本信息');	
 		
 	 	return $this->fetch('general');
