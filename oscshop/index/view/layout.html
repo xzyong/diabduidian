@@ -434,6 +434,8 @@
             return false;
         }else{
             time(this);
+            document.getElementById("zc_input_user").className = "form-control"
+            document.getElementById("zc_us").innerHTML = "";
             $.post(
                     "{:url('member/Login/send')}",
                     {telephone:phone},

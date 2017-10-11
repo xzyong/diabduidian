@@ -70,67 +70,67 @@ class Login extends Base
 
 
             $data = input('post.');
-
+			if(cookie('code') == false){
+				return ['error'=>'无发送验证码']
+			}
             if (!$data['code'] == cookie('code')) {
 
                 return ['error' => '验证码错误'];
-            }
-            $result = $this->validate($data, 'Member');
-            if (true !== $result) {
-                return ['error' => $result];
-            }
-			/**
-			 * @ password 密码 
-			 * @ username 账号
-			 * @ telephone 电话
-			 * @ groupid 
-			 * @ reg_type
-			 * @ regdate
-			 * @ lastdate
-			*/
-            $member['password'] = think_ucenter_encrypt($data['password'], config('PWD_KEY'));
-            $member['username'] = $data['telephone'];
-            $member['telephone'] = $data['telephone'];
-            $member['groupid'] = config('default_group_id');
-            $member['reg_type'] = 'pc';
-            $member['regdate'] = time();
-            $member['lastdate'] = time();
-            if (isset($data['pid'])) {
-                $pid = Db::name('member')->where('telephone', $data['pid'])->find();
-                if ($pid) {
-                    $member['pid'] = $pid['uid'];
-                }
-            }
-            if (1 == config('reg_check')) {//需要审核或者验证
-                $member['checked'] = 0;
-            } else {
-                $member['checked'] = 1;
-            }
+            }else{
+				$result = $this->validate($data, 'Member');
+				if (true !== $result) {
+					return ['error' => $result];
+				}
+				/**
+				 * @ password 密码 
+				 * @ username 账号
+				 * @ telephone 电话
+				 * @ groupid 
+				 * @ reg_type
+				 * @ regdate
+				 * @ lastdate
+				*/
+				$member['password'] = think_ucenter_encrypt($data['password'], config('PWD_KEY'));
+				$member['username'] = $data['telephone'];
+				$member['telephone'] = $data['telephone'];
+				$member['groupid'] = config('default_group_id');
+				$member['reg_type'] = 'pc';
+				$member['regdate'] = time();
+				$member['lastdate'] = time();
+				if (isset($data['pid'])) {
+					$pid = Db::name('member')->where('telephone', $data['pid'])->find();
+					if ($pid) {
+						$member['pid'] = $pid['uid'];
+					}
+				}
+				if (1 == config('reg_check')) {//需要审核或者验证
+					$member['checked'] = 0;
+				} else {
+					$member['checked'] = 1;
+				}
 
-            $uid = Db::name('member')->insert($member, false, true);
+				$uid = Db::name('member')->insert($member, false, true);
 
-            if ($uid) {
+				if ($uid) {
+					cookie('code', null);
+					return ['success' => '注册成功'];
+					$auth = array(
+						'uid' => $uid,
+						'nickname' => $member['nickname'],
+						'group_id' => $member['groupid'],
 
-                cookie('code', null);
-                $auth = array(
-                    'uid' => $uid,
-                    'nickname' => $member['nickname'],
-                    'group_id' => $member['groupid'],
+					);
+					User::store_logined_user($auth);
+					User::get_logined_user()->storage_user_action('注册成为会员');
 
-                );
 
-                User::store_logined_user($auth);
+				}
 
-                User::get_logined_user()->storage_user_action('注册成为会员');
-                return ['success' => '注册成功'];
+			}
 
-            }
-
-        }
-
-        if (User::is_login()) {
-            return ['error' => '您已经登录了账号！！'];
-        }
+			if (User::is_login()) {
+				return ['error' => '您已经登录了账号！！'];
+			}
 
 
     }
@@ -245,7 +245,6 @@ class Login extends Base
 
     public function send()
     {
-
         import('phone/ChuanglanSmsApi', EXTEND_PATH);
         $clapi = new \ChuanglanSmsApi();
         $code = rand(456783, 789561);

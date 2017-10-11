@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 年 10 月 10 日 01:15
+-- 生成日期: 2017 年 10 月 11 日 02:08
 -- 服务器版本: 5.5.53
 -- PHP 版本: 5.4.45
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `osc_admin` (
 
 INSERT INTO `osc_admin` (`admin_id`, `user_name`, `passwd`, `true_name`, `telephone`, `email`, `login_count`, `last_login_ip`, `last_ip_region`, `create_time`, `update_time`, `last_login_time`, `status`, `group_id`) VALUES
 (1, 'admin', 'MDAwMDAwMDAwMIW6fN8', '', '', 'admin@admin.com', 57, '127.0.0.1', '', 1486951601, 0, 1492922943, 1, 0),
-(4, 'winner', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 46, '127.0.0.1', '', 1490256589, 0, 1507598005, 1, 2),
+(4, 'winner', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 47, '127.0.0.1', '', 1490256589, 0, 1507685938, 1, 2),
 (5, 'ldw456', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 7, '113.97.233.146', '', 1490951867, 0, 1498460368, 1, 2);
 
 -- --------------------------------------------------------
@@ -5302,7 +5302,7 @@ CREATE TABLE IF NOT EXISTS `osc_member` (
   `islock` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否锁定',
   `lost_credit` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '拍下了不买的次数',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=34 ;
 
 --
 -- 转存表中的数据 `osc_member`
@@ -5315,7 +5315,8 @@ INSERT INTO `osc_member` (`uid`, `reg_type`, `wechat_openid`, `username`, `passw
 (29, 'weixin', 'okugcwYZiQjeO5RUGGAvmJMSxIdw', '18814118906', 'MDAwMDAwMDAwMIW6fN+FqbZi', 1, NULL, '月之殇', 1, 'http://wx.qlogo.cn/mmopen/9etjKn0GN9VUzr8micvBs7yLqc05ywJRraMZky6Fae86UQeF9RPTQsydYRMzrIxaiaO9GGZStk5UNgNMTN3B2GC1ic5oMVPsRibs/0', NULL, 6, NULL, NULL, NULL, NULL, 0, 0, 0, 1498535551, 1501061262, '', '113.97.234.235', 5, '', NULL, 2, 0, 0, 0, 0),
 (30, 'mobile', NULL, '13452636973', 'MDAwMDAwMDAwMIW6fN+FqbZi', 1, NULL, '谭俊', 0, '59cc554a874ea.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 999999, 19905, 0, 1502346970, 1506562004, '', '127.0.0.1', 18, '', '13452636973', 2, 0, 0, 0, 0),
 (31, 'mobile', NULL, '18018737310', 'MDAwMDAwMDAwMJK9p82Z0pacfaCqkn63ebA', 1, NULL, '肌肉狗', 0, 'b5cd7e52d438.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 62, 1, 0, 1503374276, 1503387940, '', '113.110.218.20', 3, '', NULL, 2, 0, 0, 0, 0),
-(32, 'mobile', NULL, '18675501896', 'MDAwMDAwMDAwMIW6fN+FqbZifrDMlw', 1, NULL, '18675501896', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 1, 0, 1503385217, 1503385217, '', '', 0, '', NULL, 2, 0, 0, 0, 0);
+(32, 'mobile', NULL, '18675501896', 'MDAwMDAwMDAwMIW6fN+FqbZifrDMlw', 1, NULL, '18675501896', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 1, 0, 1503385217, 1503385217, '', '', 0, '', NULL, 2, 0, 0, 0, 0),
+(33, 'pc', NULL, '13662579311', 'MDAwMDAwMDAwMIW6fN+E37Jh', 1, NULL, '', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 1507623028, 1507623028, '', '', 0, '', '13662579311', 2, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -6223,7 +6224,7 @@ CREATE TABLE IF NOT EXISTS `osc_user_action` (
   `info` varchar(255) NOT NULL COMMENT '行为描述',
   `add_time` int(10) NOT NULL COMMENT '加入时间',
   PRIMARY KEY (`ua_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户行为' AUTO_INCREMENT=1675 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户行为' AUTO_INCREMENT=1676 ;
 
 --
 -- 转存表中的数据 `osc_user_action`
@@ -7905,7 +7906,8 @@ INSERT INTO `osc_user_action` (`ua_id`, `user_id`, `uname`, `type`, `info`, `add
 (1671, 4, 'winner', '后台系统用户', '更新商品状态', 1506676860),
 (1672, 4, 'winner', '后台系统用户', '更新商品状态', 1506677152),
 (1673, 4, 'winner', '后台系统用户', '登录了后台系统', 1506740880),
-(1674, 4, 'winner', '后台系统用户', '登录了后台系统', 1507598005);
+(1674, 4, 'winner', '后台系统用户', '登录了后台系统', 1507598005),
+(1675, 4, 'winner', '后台系统用户', '登录了后台系统', 1507685938);
 
 -- --------------------------------------------------------
 
