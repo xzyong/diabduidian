@@ -71,7 +71,7 @@ class Login extends Base
 
             $data = input('post.');
 
-            if (!$data['code'] == cookie('code')) {
+            if ($data['code'] !== cookie('code')) {
 
                 return ['error' => '验证码错误'];
             }
@@ -106,7 +106,7 @@ class Login extends Base
             } else {
                 $member['checked'] = 1;
             }
-
+			
             $uid = Db::name('member')->insert($member, false, true);
 
             if ($uid) {
@@ -119,11 +119,9 @@ class Login extends Base
 
                 );
 
-                User::store_logined_user($auth);
-
                 User::get_logined_user()->storage_user_action('注册成为会员');
+                User::store_logined_user($auth);
                 return ['success' => '注册成功'];
-
             }
 
         }
