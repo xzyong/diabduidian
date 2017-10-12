@@ -245,12 +245,14 @@ class Login extends Base
 
     public function send()
     {
+		//return true;die;
         import('phone/ChuanglanSmsApi', EXTEND_PATH);
         $clapi = new \ChuanglanSmsApi();
         $code = rand(456783, 789561);
         $phone = input('post.telephone');
-        $content = '动态码' . $code . ',有效期为9分钟,请勿将动态码和密码告知他人!';
-        if ($clapi->sendSMS($phone, $content)) {
+        $content = '动态码' . $code . ',有效期为9分钟,请勿将动态码和密码告知他人!';\
+		$send=$clapi->sendSMS($phone,$content);
+        if ($send){
             cookie('code', $code, 900);
             cookie('phone', $phone, 900);
             return true;

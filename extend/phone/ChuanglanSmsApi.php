@@ -34,10 +34,10 @@ class ChuanglanSmsApi {
 		
 		//创蓝接口参数
 		$postArr = array (
-				          'account' => self::API_ACCOUNT,
-				          'pswd' => self::API_PASSWORD,
-				          'msg' => $msg,
-				          'mobile' => $mobile,
+				          'account' => self::API_ACCOUNT,//账号
+				          'pswd' => self::API_PASSWORD,//密码
+				          'msg' => $msg,//短信信息
+				          'mobile' => $mobile,//发送到手机号
 				          'needstatus' => $needstatus
                      );
 		$result = $this->curlPost( self::API_SEND_URL , $postArr);

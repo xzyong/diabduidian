@@ -146,7 +146,7 @@
                     <div class="form-group">
                         <label for="zc_input_user" class="col-sm-3 control-label">手机号：</label>
                         <div class="col-sm-9">
-                            <input type="tel" class="form-control" id="zc_input_user" placeholder="请输入手机号码！"><span style="color: #ff0000;" id="zc_us"></span>
+                            <input type="tel" value="13662579311" class="form-control" id="zc_input_user" placeholder="请输入手机号码！"><span style="color: #ff0000;" id="zc_us"></span>
                         </div>
                     </div>
 
@@ -267,13 +267,13 @@
             var phone = document.getElementById("bd_input_user").value;
             var mobile_phone2 = /^1[3|4|5|7|8]\d{9}$/;
             if (phone=='' || !mobile_phone2.test(phone) ) {
-                document.getElementById("bd_input_user").className = "myfunction-input"
+                document.getElementById("bd_input_user").className = "myfunction-input";
                 document.getElementById("bd_us").innerHTML = "手机号码不正确";
                 return false;
             }else{
                 time(this);
                 $.post(
-                        "{:url('member/Login/send')}",
+                        "{url('member/Login/send')}",
                         {telephone:phone},
                         function(data){
                             if (data) {
@@ -420,7 +420,7 @@
             wait--;
             setTimeout(function() {
                         time(o)
-                    },
+						},
                     1000)
         }
     }
@@ -434,14 +434,15 @@
             return false;
         }else{
             time(this);
-            document.getElementById("zc_input_user").className = "form-control"
-            document.getElementById("zc_us").innerHTML = "";
+			document.getElementById("zc_input_user").className = "form-control";
+			document.getElementById("zc_us").innerHTML = "";
             $.post(
-                    "{:url('member/Login/send')}",
+                    "{url('member/Login/send')}",
                     {telephone:phone},
                     function(data){
                         if (data) {
                             alert('发送成功！');
+							//alert(data);
                         }else{
                             alert('发送失败！');
                         }
@@ -450,6 +451,8 @@
         }
 
     }
+	//document.getElementById("zc_input_user").className = "form-control";
+	//document.getElementById("zc_us").innerHTML = "";
 
     document.getElementById("zhuce").onclick=function() {
         var zc_user = document.getElementById("zc_input_user").value;
