@@ -114,13 +114,12 @@ class Login extends Base
                 cookie('code', null);
                 $auth = array(
                     'uid' => $uid,
-                    'nickname' => $member['nickname'],
+                    'nickname' => $member['username'],
                     'group_id' => $member['groupid'],
 
                 );
-
-                User::get_logined_user()->storage_user_action('注册成为会员');
                 User::store_logined_user($auth);
+                User::get_logined_user()->storage_user_action('注册成为会员');
                 return ['success' => '注册成功'];
             }
 

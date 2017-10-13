@@ -18,6 +18,7 @@ class User{
 	 * @return null|Admin
      */
 	static function get_logined_user() {
+		//获取登录的user
 		$stored_user = session('user_auth');
 		if(empty($stored_user)) {
 			return null;
