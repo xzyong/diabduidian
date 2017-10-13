@@ -19,7 +19,7 @@
     
         <div class="weui-flex__item">
             <div class="placeholder">
-                <a href="{:url('Membership/index','id=28')}"><img class="icon-centent" src="__PUBLIC__/index/img/icon-01.png" alt="">
+                <a href="{:url('Membership/index','id=63')}"><img class="icon-centent" src="__PUBLIC__/index/img/icon-01.png" alt="">
                 <p class="center">会员尊享酒</p>
             </a>            </div>
         </div>
@@ -59,24 +59,6 @@
                     </s></p>
                 <p><span><i class="icon iconfont icon-daojishi"></i></span> <span>离结束还剩：</span>
                     <span class="lxftime" endtime="{$list.end_time}"></span>
-                </p>
-            </div>
-        </div>
-    {/volist}
-     {volist name="list1" id="list1" }
-        <div class="centent-list">
-            <div class="list-img"> <a href="{:url('Goods/index','id='.$list1.goods_id)}"><img src="IMG_ROOT{$list1.image|resize=100,100}" alt=""></a>
-            </div>
-            <div class="list-text">
-                <div class="title"><a href="{:url('Goods/index','id='.$list1.goods_id)}">{$list1.name}</a></div>
-                <p class="money">秒杀价：￥{$list1.price}
-                    
-                </p>
-                <p><s>￥{$list1.origin_price}
-                
-                    </s></p>
-                <p><span><i class="icon iconfont icon-daojishi"></i></span> <span>离结束还剩：</span>
-                    <span class="lxftime" endtime="{$list1.end_time}"></span>
                 </p>
             </div>
         </div>

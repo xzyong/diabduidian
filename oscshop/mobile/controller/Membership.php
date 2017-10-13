@@ -33,7 +33,7 @@ class Membership extends MobileBase
     }
 
     public function sel($id){
-       $list= Db::view('goods','*')->view('GoodsToCategory','category_id','GoodsToCategory.goods_id=goods.goods_id')->where('GoodsToCategory.category_id',$id)->select();
+       $list= Db::name('goods')->where('category_pid',$id)->select();
        // dump($list);die;
        foreach ($list as $key => $v) {
           if ($v['end_time']!==NULL) {
@@ -47,7 +47,6 @@ class Membership extends MobileBase
             }
           }
        }
-       // var_dump($list[3]);die;
        return $list;
     }
 

@@ -22,8 +22,8 @@ class Index extends MobileBase
 
 		$this->assign('cate', config('membership'));
 		$this->assign('empty', '~~暂无数据');
-		$this->assign('list', $this->sel(28));
-		$this->assign('list1', $this->sel(29));
+		$this->assign('list', $this->sel(63));
+		//$this->assign('list1', $this->sel(29));
         $this->assign('banner', Db::name('ads_items')->where('ad_id',1)->select());
 		$this->assign('SEO',['title'=>config('SITE_TITLE'),'keywords'=>config('SITE_KEYWORDS'),'description'=>config('SITE_DESCRIPTION')]);
 		
@@ -34,7 +34,7 @@ class Index extends MobileBase
 
 
 	 public function sel($id){
-       $list= Db::name('goods')->alias('a')->where('a.end_time','>',date('Y-m-d,H-i-s'))->join('goods_to_category w','a.goods_id = w.goods_id')->where(['w.category_id'=>$id,'a.status'=>1])->order('a.goods_id desc')->limit(2)->select();
+       $list= Db::name('goods')->where('end_time','>',date('Y-m-d,H-i-s'))->where(['category_pid'=>$id,'status'=>1])->order('goods_id desc')->limit(2)->select();
        foreach ($list as $key => $v) {
            $list[$key]['end_time']=strtotime($v['end_time'])*1000;
        }
