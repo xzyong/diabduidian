@@ -40,8 +40,8 @@ class Goods extends AdminBase{
 
 		$this->assign('empty','<tr><td colspan="20">没有数据~</td></tr>');
 		
-		$this->assign('category',Db::name('category')->field('id,pid,name')->where('pid','32')->select());
-		
+		$this->assign('category',osc_goods()->getTree());
+	
 		$this->assign('list',$list);
 	
 		return $this->fetch();
@@ -50,6 +50,14 @@ class Goods extends AdminBase{
 	 //新增商品
 	 public function add(){
 		
+        $category=osc_goods()->getTree();
+		foreach($category as $v){
+			if($v['id']=='61'){
+				foreach($v['child'] as $vo){
+					$cate[]=$vo;
+				}
+			}
+		}
 		if(request()->isPost()){
 			
 			$data=input('post.');
@@ -78,6 +86,7 @@ class Goods extends AdminBase{
 		$this->assign('weight_class',Db::name('WeightClass')->select());
 		$this->assign('length_class',Db::name('LengthClass')->select());
 	 	$this->assign('crumbs', '新增');
+		$this->assign('cate',$cate);
 		$this->assign('action', url('Goods/add'));
 		
 	 	return $this->fetch('edit');

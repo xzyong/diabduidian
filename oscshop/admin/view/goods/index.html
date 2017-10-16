@@ -25,7 +25,7 @@
 				<option value="all">全部分类</option>			
 				<?php $input_cid=input('category'); ?>
 				{volist name="category" id="cat"}
-					{if condition="$cat['name']=='商品入会'"}
+					{if condition="$cat['id']== '61'"}
 						{volist name="$cat['child']" id="catv"}
 							<option {if condition="$input_cid eq $catv['id']"} selected="selected"{/if} value="{$catv.id}">{$catv.name}</option>
 							{volist name="$catv['child']" id="vo"}

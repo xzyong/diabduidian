@@ -1,0 +1,229 @@
+{
+	"index.html": {
+		"resources": [
+			"js/html/index.js",
+			"js/chenks-time.js",
+			"js/jquery.min.js",
+			"css/weui.min.css",
+			"js/swiper.min.js",
+			"img/icon-04.png",
+			"css/font_icon/iconfont.woff",
+			"js/jquery-2.1.4.js",
+			"img/icon-03.png",
+			"css/my-sytle.css",
+			"img/icon-02.png",
+			"js/city-picker.min.js",
+			"js/html/common.js",
+			"css/font_icon/iconfont.css",
+			"css/jquery-weui.min.css",
+			"js/jquery-weui.min.js",
+			"mall_index.html",
+			"ruhui_centent.html",
+			"pjruhui_list.html",
+			"ruhui_product.html"
+		],
+		"refer": [
+			"mall_index.html",
+			"ruhui_centent.html",
+			"pjruhui_list.html",
+			"ruhui_product.html"
+		]
+	},
+	"user.html": {
+		"resources": [
+			"img/user/list-04.png",
+			"img/user/list-07.png",
+			"img/user/list-05.png",
+			"img/user/list-03.png",
+			"img/user/list-08.png",
+			"img/user/top_bg.jpg",
+			"img/user/list-06.png",
+			"img/user/list-01.png",
+			"img/user/icon-jd.png",
+			"img/user/list-02.png",
+			"img/head.jpg",
+			"img/user/list-09.png",
+			"index.html",
+			"mall_index.html",
+			"user_order_02.html"
+		],
+		"refer": [
+			"index.html",
+			"mall_index.html",
+			"user_order_02.html"
+		]
+	},
+	"mall_index.html": {
+		"resources": [
+			"img/mall-icon-002.png",
+			"img/mall-icon-005.png",
+			"img/icon-size02.png",
+			"img/icon_cz_dj.jpg",
+			"img/mall-icon-008.png",
+			"img/mall-icon-009.png",
+			"img/title-01.jpg",
+			"img/icon_tj_dj.jpg",
+			"img/mall-icon-004.png",
+			"img/banner/banner-02.jpg",
+			"img/title-02.jpg",
+			"img/icon-size01.png",
+			"img/mall-icon-003.png",
+			"img/mall-icon-001.png",
+			"img/mall-icon-007.png",
+			"user.html",
+			"img/test-data/mail-02.jpg",
+			"img/test-data/mail-01.jpg",
+			"img/mall-icon-006.png",
+			"img/mall-icon-010.png",
+			"index.html",
+			"mall_classify.html"
+		],
+		"refer": [
+			"user.html",
+			"index.html",
+			"mall_classify.html"
+		]
+	},
+	"ruhui_centent.html": {
+		"resources": [
+			"img/test-data/lm.jpg",
+			"img/head.jpg",
+			"img/test-data/jingtou.jpg",
+			"img/test-data/index-ing (1).jpg",
+			"img/test-data/index-ing (2).jpg",
+			"shop_purchase.html"
+		],
+		"refer": [
+			"shop_purchase.html"
+		]
+	},
+	"shop_purchase.html": {
+		"resources": [
+			"img/test-data/logo-01.jpg",
+			"img/icon_gouxuan.png"
+		]
+	},
+	"ruhui_product.html": {
+		"resources": [
+			"user.html"
+		],
+		"refer": [
+			"user.html"
+		]
+	},
+	"user_order_02.html": {
+		"resources": [
+			"img/test-data/01.jpg",
+			"mall_index.html",
+			"user_order_01.html",
+			"user_order_03.html"
+		],
+		"refer": [
+			"mall_index.html",
+			"user_order_01.html",
+			"user_order_03.html"
+		]
+	},
+	"user_order_01.html": {
+		"resources": [
+			"user_order_02.html",
+			"mall_index.html"
+		],
+		"refer": [
+			"user_order_02.html",
+			"mall_index.html"
+		]
+	},
+	"user_order_03.html": {
+		"resources": [
+			"user_order_02.html",
+			"user_order_04.html"
+		],
+		"refer": [
+			"user_order_02.html",
+			"user_order_04.html"
+		]
+	},
+	"user_order_04.html": {
+		"resources": [
+			"user_order_03.html",
+			"user_order_01.html"
+		],
+		"refer": [
+			"user_order_03.html",
+			"user_order_01.html"
+		]
+	},
+	"mall_classify.html": {
+		"resources": [
+			"img/classify/16.jpg",
+			"img/classify/05.jpg",
+			"img/classify/06.jpg",
+			"img/classify/02.jpg",
+			"img/classify/13.jpg",
+			"img/classify/01.jpg",
+			"img/classify/11.jpg",
+			"img/classify/12.jpg",
+			"img/classify/07.jpg",
+			"img/classify/14.jpg",
+			"img/classify/15.jpg",
+			"img/classify/04.jpg",
+			"img/classify/10.jpg",
+			"img/classify/08.jpg",
+			"img/classify/03.jpg",
+			"mall_list.html",
+			"img/classify/09.jpg",
+			"img/classify/17.jpg"
+		],
+		"refer": [
+			"mall_list.html"
+		]
+	},
+	"mall_list.html": {
+		"resources": [
+			"mall_index.html",
+			"mall_centent.html"
+		],
+		"refer": [
+			"mall_index.html",
+			"mall_centent.html"
+		]
+	},
+	"mall_centent.html": {
+		"resources": [
+			"mall_shop_purchase.html",
+			"img/test-data/mall-logo.jpg",
+			"img/test-data/zxingche.jpg"
+		],
+		"refer": [
+			"mall_shop_purchase.html"
+		]
+	},
+	"mall_shop_purchase.html": {
+		"resources": [
+			"img/test-data/01.jpg",
+			"pay.html"
+		],
+		"refer": [
+			"pay.html"
+		]
+	},
+	"pay.html": {
+		"resources": [
+			"pay.html",
+			"img/icon_gouxuan.png"
+		],
+		"refer": [
+			"pay.html"
+		]
+	},
+	"pjruhui_list.html": {
+		"resources": [
+			"img/test-data/logo-01.jpg",
+			"ruhui_centent.html"
+		],
+		"refer": [
+			"ruhui_centent.html"
+		]
+	}
+}

@@ -370,7 +370,6 @@ static function get_recommend_arr($type=1,$num=6,$attr=5){
 	}
 
 	public function getGoodslists($where,$order,$num,$lis){
-		//$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where('w.category_id','in',$lis)->where($where)->order($order)->paginate($num);
 		$list=   Db::name('goods')->where('category_pid','in',$lis)->where($where)->order($order)->paginate($num);
 		return $list ;
 	}

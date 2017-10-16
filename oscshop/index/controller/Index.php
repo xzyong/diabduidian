@@ -35,7 +35,7 @@ class Index extends HomeBase
             $this->assign('states',input('param.states'));
         }
 		
-		$category=Db::name('category')->where('pid',0)->where('name','商品入会')->field('id')->select();
+		$category=Db::name('category')->where('pid',0)->where('name','商品充值')->field('id')->select();
 		
 		$this->assign('empty', '~~暂无数据');
 		

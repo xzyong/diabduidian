@@ -13,7 +13,7 @@
             <ul>
 
                 {volist name="cate" id="cate"}
-                <li><a href="{:url('Exproduct/me_index',['id'=>$id,'area_id'=>$cate.id])}">{$cate.area_name}</a></li>
+                <li><a href="{:url('Exproduct/me_index',['id'=>$id,'cate_id'=>$cate.id])}">{$cate.name}</a></li>
                 {/volist}
 
             </ul>
