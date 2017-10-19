@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2017 年 10 月 10 日 01:15
+-- 生成日期: 2017 年 10 月 18 日 01:54
 -- 服务器版本: 5.5.53
 -- PHP 版本: 5.4.45
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `ocshop`
 --
+CREATE DATABASE `ocshop` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ocshop`;
 
 -- --------------------------------------------------------
 
@@ -89,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `osc_admin` (
 
 INSERT INTO `osc_admin` (`admin_id`, `user_name`, `passwd`, `true_name`, `telephone`, `email`, `login_count`, `last_login_ip`, `last_ip_region`, `create_time`, `update_time`, `last_login_time`, `status`, `group_id`) VALUES
 (1, 'admin', 'MDAwMDAwMDAwMIW6fN8', '', '', 'admin@admin.com', 57, '127.0.0.1', '', 1486951601, 0, 1492922943, 1, 0),
-(4, 'winner', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 46, '127.0.0.1', '', 1490256589, 0, 1507598005, 1, 2),
+(4, 'winner', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 50, '127.0.0.1', '', 1490256589, 0, 1508289370, 1, 2),
 (5, 'ldw456', 'MDAwMDAwMDAwMIW6fN+FqbZi', '', '', '', 7, '113.97.233.146', '', 1490951867, 0, 1498460368, 1, 2);
 
 -- --------------------------------------------------------
@@ -3693,36 +3695,6 @@ INSERT INTO `osc_attribute_value` (`attribute_value_id`, `name`, `attribute_id`,
 -- --------------------------------------------------------
 
 --
--- 表的结构 `osc_auctioning`
---
-
-CREATE TABLE IF NOT EXISTS `osc_auctioning` (
-  `goods_id` int(11) NOT NULL COMMENT '商品ID',
-  `auction_begintime` datetime NOT NULL COMMENT '开拍时间',
-  `auction_endtime` datetime NOT NULL COMMENT '结拍时间',
-  `views` int(11) NOT NULL DEFAULT '0' COMMENT '围观人数',
-  `bid_num` int(11) NOT NULL DEFAULT '0' COMMENT '出价次数',
-  `origin_price` int(10) unsigned NOT NULL COMMENT '起拍价格',
-  `deposit` int(11) NOT NULL DEFAULT '0' COMMENT '保证金',
-  `fixed_price` int(11) NOT NULL DEFAULT '0' COMMENT '一口价',
-  `mark_up` int(11) NOT NULL COMMENT '加价幅度',
-  PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品拍卖信息表';
-
---
--- 转存表中的数据 `osc_auctioning`
---
-
-INSERT INTO `osc_auctioning` (`goods_id`, `auction_begintime`, `auction_endtime`, `views`, `bid_num`, `origin_price`, `deposit`, `fixed_price`, `mark_up`) VALUES
-(13, '2016-11-09 19:36:08', '2016-11-26 19:36:14', 23, 21, 5000, 500, 10000, 500),
-(14, '2015-11-11 19:42:25', '2016-11-01 19:42:34', 1, 1, 400, 0, 0, 10),
-(15, '2016-11-17 19:44:56', '2016-12-30 19:45:01', 3, 4, 1000, 100, 0, 100),
-(16, '2016-11-10 19:48:35', '2016-11-26 19:48:44', 67, 67, 20000, 0, 80000, 500),
-(17, '2016-11-17 19:58:35', '2016-11-30 19:58:37', 21, 22, 4000, 0, 0, 400);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `osc_auction_goods_special_show_relation`
 --
 
@@ -3787,6 +3759,36 @@ INSERT INTO `osc_auction_special_show` (`id`, `title`, `img`, `auction_begintime
 (8, '陶印精品专场', 'images/osc1/auction/index/banner-03.jpg', '2016-12-29 15:47:09', '2017-01-20 15:47:16', '景德镇', 0, 0),
 (9, '山水画专场', 'images/osc1/auction/index/banner-04.jpg', '2016-10-04 15:48:27', '2016-11-26 15:48:32', '广州画廊', 4, 0),
 (10, '殷大师书画专场', 'images/osc1/auction/index/banner-04.jpg', '2016-11-26 15:50:57', '2016-12-22 15:51:14', '北就四合院', 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `osc_auctioning`
+--
+
+CREATE TABLE IF NOT EXISTS `osc_auctioning` (
+  `goods_id` int(11) NOT NULL COMMENT '商品ID',
+  `auction_begintime` datetime NOT NULL COMMENT '开拍时间',
+  `auction_endtime` datetime NOT NULL COMMENT '结拍时间',
+  `views` int(11) NOT NULL DEFAULT '0' COMMENT '围观人数',
+  `bid_num` int(11) NOT NULL DEFAULT '0' COMMENT '出价次数',
+  `origin_price` int(10) unsigned NOT NULL COMMENT '起拍价格',
+  `deposit` int(11) NOT NULL DEFAULT '0' COMMENT '保证金',
+  `fixed_price` int(11) NOT NULL DEFAULT '0' COMMENT '一口价',
+  `mark_up` int(11) NOT NULL COMMENT '加价幅度',
+  PRIMARY KEY (`goods_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品拍卖信息表';
+
+--
+-- 转存表中的数据 `osc_auctioning`
+--
+
+INSERT INTO `osc_auctioning` (`goods_id`, `auction_begintime`, `auction_endtime`, `views`, `bid_num`, `origin_price`, `deposit`, `fixed_price`, `mark_up`) VALUES
+(13, '2016-11-09 19:36:08', '2016-11-26 19:36:14', 23, 21, 5000, 500, 10000, 500),
+(14, '2015-11-11 19:42:25', '2016-11-01 19:42:34', 1, 1, 400, 0, 0, 10),
+(15, '2016-11-17 19:44:56', '2016-12-30 19:45:01', 3, 4, 1000, 100, 0, 100),
+(16, '2016-11-10 19:48:35', '2016-11-26 19:48:44', 67, 67, 20000, 0, 80000, 500),
+(17, '2016-11-17 19:58:35', '2016-11-30 19:58:37', 21, 22, 4000, 0, 0, 400);
 
 -- --------------------------------------------------------
 
@@ -4165,16 +4167,16 @@ CREATE TABLE IF NOT EXISTS `osc_category` (
   `update_time` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品分类' AUTO_INCREMENT=75 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品分类' AUTO_INCREMENT=81 ;
 
 --
 -- 转存表中的数据 `osc_category`
 --
 
 INSERT INTO `osc_category` (`id`, `pid`, `name`, `image`, `meta_keyword`, `meta_description`, `sort_order`, `update_time`) VALUES
-(61, 0, '商品入会', '', '商品入会', '商品入会', 0, 1505283209),
+(61, 0, '商品充值', '', '商品入会', '商品入会', 0, 1505283209),
 (62, 0, '商品兑换', '', '商品兑换商品兑换', '商品兑换', 0, 1505283260),
-(63, 61, '会员尊享酒', 'images/osc4/_20170926155741.png', '', '', 0, 1506412684),
+(63, 61, '分类A', '', '', '', 0, 1508137949),
 (64, 62, '食品/酒类/生鲜/特产', 'images/osc4/pijiu.png', '', '', 0, 1506413951),
 (65, 62, '手机 / 运营商 / 数码', 'images/osc4/Phone.jpg', '', '', 0, 1506414218),
 (66, 62, '电脑/办公', 'images/osc4/cont.jpg', '', '', 0, 1506415150),
@@ -4184,7 +4186,12 @@ INSERT INTO `osc_category` (`id`, `pid`, `name`, `image`, `meta_keyword`, `meta_
 (71, 66, '笔记本电脑', 'images/osc4/diannao.png', '', '', 0, 1506414715),
 (72, 65, '三星产品', 'images/osc4/58b78c19N755bee71.jpg', '', '', 0, 1506414872),
 (73, 65, '小米系列', 'images/osc4/58b78134N78d5dcf6.jpg', '', '', 0, 1506415091),
-(74, 66, '台式机/一体机', 'images/osc4/599cef01N40bb3ebb.jpg', '', '', 0, 1506415266);
+(74, 66, '台式机/一体机', 'images/osc4/599cef01N40bb3ebb.jpg', '', '', 0, 1506415266),
+(75, 62, '家居/家具/家装/厨具', 'images/osc4/58e5d15fNa11c50d8.jpg', '', '', 0, 1508119356),
+(76, 62, '母婴/玩具乐器', 'images/osc4/56uhi8jitgr6f.PNG', '', '', 0, 1508119489),
+(78, 61, '分类B', '', '', '', 0, 1508122733),
+(79, 61, '分类C', '', '', '', 0, 1508122748),
+(80, 61, '分类D', '', '', '', 0, 1508122762);
 
 -- --------------------------------------------------------
 
@@ -4377,7 +4384,7 @@ CREATE TABLE IF NOT EXISTS `osc_goods` (
   `goods_list` text NOT NULL COMMENT '物品清单',
   `category_pid` int(11) NOT NULL COMMENT '所属分类',
   PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品信息表' AUTO_INCREMENT=150 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品信息表' AUTO_INCREMENT=152 ;
 
 --
 -- 转存表中的数据 `osc_goods`
@@ -4398,9 +4405,10 @@ INSERT INTO `osc_goods` (`goods_id`, `name`, `model`, `sku`, `location`, `collec
 (141, '大家好，还是真的好', '', '', 0, 0, 93, 0, 0, 'images/osc1/mail-01.jpg', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '0.00', 0, 3, 1, 0, 1, 1, 0, 1, '2017-03-31 20:45:09', '2017-09-30 09:29:48', 70, 0, '0.00', NULL, NULL, '0000-00-00 00:00:00', '', 0),
 (144, ' 黄金比例食用调和油小瓶粮油1800ml', '', '', 0, 0, 100, 0, 0, 'images/osc1/mail-01.jpg', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '0.00', 0, 4, 1, 0, 1, 1, 0, 1, '2017-03-31 21:38:42', '2017-09-11 04:58:15', 43, 0, '0.00', NULL, NULL, '0000-00-00 00:00:00', '', 0),
 (145, ' 黄金比例食用调和油小瓶粮油1800ml', '', '', 0, 0, 95, 0, 0, 'images/osc1/mail-01.jpg', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '0.00', 0, 2, 1, 0, 1, 1, 0, 1, '2017-03-31 21:38:42', '2017-10-09 09:33:04', 120, 0, '0.00', NULL, NULL, '0000-00-00 00:00:00', '', 71),
-(146, '会员尊享酒-小提', '', '', 2, 0, 88, 0, 0, 'images/osc4/16pic_1376344_b.jpg', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '2000.00', 12, 0, 0, 0, 1, 1, 2, 1, '2017-06-05 14:45:47', '2017-09-27 17:55:23', 214, 0, '4888.00', NULL, NULL, '2019-06-29 14:44:49', '', 0),
-(147, '原度会员尊享酒8000元/4提', '', '', 2, 0, 87, 0, 0, 'images/osc4/14Y58PICSKG.jpg', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '8000.00', 52, 0, 0, 0, 1, 1, 1, 1, '2017-06-05 14:47:55', '2017-09-28 13:50:22', 427, 0, '12888.00', NULL, NULL, '2017-10-15 23:59:59', '', 0),
-(149, '点对点商城', '', '', 0, 0, 12, 0, 0, 'images/osc4/logo-100x100.png', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '0.00', 0, 3, 1, 0, 1, 1, 1, 1, '2017-09-13 14:34:23', '2017-09-28 12:03:38', 27, 0, '0.00', NULL, NULL, '0000-00-00 00:00:00', '', 71);
+(146, '会员尊享酒-小提', '', '', 0, 0, 88, 0, 0, 'images/osc4/16pic_1376344_b.jpg', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '2000.00', 12, 0, 0, 0, 1, 1, 2, 1, '2017-06-05 14:45:47', '2017-10-16 16:08:35', 215, 0, '4888.00', NULL, NULL, '2019-06-29 14:44:49', '', 63),
+(147, '原度会员尊享酒8000元/4提', '', '', 2, 0, 87, 0, 0, 'images/osc4/14Y58PICSKG.jpg', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '8000.00', 52, 0, 0, 0, 1, 1, 1, 1, '2017-06-05 14:47:55', '2017-10-18 09:18:41', 429, 0, '12888.00', NULL, NULL, '2017-10-31 23:59:59', '', 78),
+(149, '点对点商城', '', '', 0, 0, 12, 0, 0, 'images/osc4/logo-100x100.png', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '0.00', 0, 3, 1, 0, 1, 1, 1, 1, '2017-09-13 14:34:23', '2017-09-28 12:03:38', 27, 0, '0.00', NULL, NULL, '0000-00-00 00:00:00', '', 71),
+(151, '日', '', '', 0, 0, 13, 0, 0, '', 0, 1, '0.00000000', 0, '0.00000000', '0.00000000', '0.00000000', 0, '1234.00', 1236, 0, 0, 0, 1, 1, 1, 1, '2017-10-17 16:22:38', '0000-00-00 00:00:00', 0, 0, '12345.00', NULL, NULL, '0000-00-00 00:00:00', '', 63);
 
 -- --------------------------------------------------------
 
@@ -4533,7 +4541,7 @@ INSERT INTO `osc_goods_comment` (`id`, `userpic`, `goods_id`, `phone`, `user_nam
 (51, '', 147, '', '游客', 'gdashdsfh', 0, '2017-08-10 18:02:24', '', 2, 0, NULL, NULL),
 (52, '598c272120d2a.jpg', 91, '', '13452636973', '哈O(∩_∩)O哈哈~', 0, '2017-08-10 22:35:28', '', 2, 0, NULL, NULL),
 (53, '', 147, '', '游客', 'qw', 0, '2017-09-15 10:35:16', '', 2, 0, NULL, NULL),
-(54, '', 147, '', 'winner', 'o哈哈哈哈', 0, '2017-09-15 13:51:22', '112.97.61.230', 1, 43, NULL, NULL),
+(54, '', 147, '', 'winner', 'o哈哈哈哈', 0, '2017-09-15 13:51:22', '112.97.61.230', 2, 43, NULL, 4),
 (55, '', 149, '', '游客', 'qwe', 0, '2017-09-22 10:37:40', '', 2, 0, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -4550,7 +4558,7 @@ CREATE TABLE IF NOT EXISTS `osc_goods_description` (
   `meta_description` varchar(255) NOT NULL,
   `meta_keyword` varchar(255) NOT NULL,
   PRIMARY KEY (`goods_description_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品信息描述表' AUTO_INCREMENT=149 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品信息描述表' AUTO_INCREMENT=151 ;
 
 --
 -- 转存表中的数据 `osc_goods_description`
@@ -4622,7 +4630,8 @@ INSERT INTO `osc_goods_description` (`goods_description_id`, `goods_id`, `summar
 (144, 145, '', '<p><img alt="" src="http://www.bc.com/public/uploads/cache/images/ckeditor/20170222/2017022210057100-630x1082.jpg" /></p>\r\n', '', ''),
 (145, 146, '', '<p><img alt="" src="http://www.shop.com/public/uploads/cache/images/ckeditor/20170605/2017060598981029-600x932.jpg" /></p>\r\n', '', ''),
 (146, 147, '', '<p><img alt="" src="http://www.shop.com/public/uploads/cache/images/ckeditor/20170605/2017060553100539-630x811.jpg" /></p>\r\n', '', ''),
-(148, 149, '', '', '', '');
+(148, 149, '', '', '', ''),
+(150, 151, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -5295,7 +5304,7 @@ CREATE TABLE IF NOT EXISTS `osc_member` (
   `lastip` char(15) NOT NULL DEFAULT '' COMMENT '上次登录ip',
   `loginnum` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '登陆次数',
   `email` char(32) NOT NULL DEFAULT '' COMMENT '电子邮箱',
-  `telephone` varchar(11) DEFAULT NULL,
+  `telephone` varchar(11) DEFAULT NULL COMMENT '推荐人手机号',
   `groupid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户组id',
   `areaid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '地区id',
   `message` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否有短消息',
@@ -5313,7 +5322,7 @@ INSERT INTO `osc_member` (`uid`, `reg_type`, `wechat_openid`, `username`, `passw
 (25, 'mobile', 'oRrdQt0b_0X9ZwzqnbIukO_oWOcQ', '18814118908', 'MDAwMDAwMDAwMIW6fN+FqbZi', 1, NULL, '月之殇', 0, 'http://wx.qlogo.cn/mmopen/2PJ3P61aIwUeSyh2gnGNftJWvqnMpnu9ITOEBCPiaVpwypDMX5iaVgwTUfwKS6jDhulNeia8WIDttHqsnPz8qLiaELib8Do5bPM2G/0', NULL, 6, NULL, NULL, NULL, NULL, 0, 0, 0, 1497321914, 1501059815, '', '113.97.234.235', 7, '', NULL, 2, 0, 0, 0, 0),
 (27, 'weixin', 'o61mkwlTzEhw9SdV2eyXQ47NZjbY', '18814118909', 'MDAwMDAwMDAwMIW6fN+FqbZifq2inw', 1, NULL, '月之殇', 1, 'http://wx.qlogo.cn/mmopen/UZAXqMHjunyWjSTapHUZQBqXq8tOdOm8etDp3xSvdGibgeXfLBfxVxYRoLkhm73ibEhKmu1IFxr7ID0bfjAlquWaPdr1ZKeO85/0', NULL, 6, NULL, NULL, NULL, NULL, 303, 95, 0, 1497344908, 1501050189, '', '113.97.233.146', 27, '', NULL, 2, 0, 0, 0, 0),
 (29, 'weixin', 'okugcwYZiQjeO5RUGGAvmJMSxIdw', '18814118906', 'MDAwMDAwMDAwMIW6fN+FqbZi', 1, NULL, '月之殇', 1, 'http://wx.qlogo.cn/mmopen/9etjKn0GN9VUzr8micvBs7yLqc05ywJRraMZky6Fae86UQeF9RPTQsydYRMzrIxaiaO9GGZStk5UNgNMTN3B2GC1ic5oMVPsRibs/0', NULL, 6, NULL, NULL, NULL, NULL, 0, 0, 0, 1498535551, 1501061262, '', '113.97.234.235', 5, '', NULL, 2, 0, 0, 0, 0),
-(30, 'mobile', NULL, '13452636973', 'MDAwMDAwMDAwMIW6fN+FqbZi', 1, NULL, '谭俊', 0, '59cc554a874ea.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 999999, 19905, 0, 1502346970, 1506562004, '', '127.0.0.1', 18, '', '13452636973', 2, 0, 0, 0, 0),
+(30, 'mobile', NULL, '13452636973', 'MDAwMDAwMDAwMIW6fN+FqbZi', 1, NULL, '谭俊', 0, '59cc554a874ea.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 999999, 19905, 0, 1502346970, 1508141449, '', '127.0.0.1', 19, '', '13452636973', 2, 0, 0, 0, 0),
 (31, 'mobile', NULL, '18018737310', 'MDAwMDAwMDAwMJK9p82Z0pacfaCqkn63ebA', 1, NULL, '肌肉狗', 0, 'b5cd7e52d438.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 62, 1, 0, 1503374276, 1503387940, '', '113.110.218.20', 3, '', NULL, 2, 0, 0, 0, 0),
 (32, 'mobile', NULL, '18675501896', 'MDAwMDAwMDAwMIW6fN+FqbZifrDMlw', 1, NULL, '18675501896', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 1, 0, 1503385217, 1503385217, '', '', 0, '', NULL, 2, 0, 0, 0, 0);
 
@@ -6223,7 +6232,7 @@ CREATE TABLE IF NOT EXISTS `osc_user_action` (
   `info` varchar(255) NOT NULL COMMENT '行为描述',
   `add_time` int(10) NOT NULL COMMENT '加入时间',
   PRIMARY KEY (`ua_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户行为' AUTO_INCREMENT=1675 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户行为' AUTO_INCREMENT=1700 ;
 
 --
 -- 转存表中的数据 `osc_user_action`
@@ -7905,7 +7914,32 @@ INSERT INTO `osc_user_action` (`ua_id`, `user_id`, `uname`, `type`, `info`, `add
 (1671, 4, 'winner', '后台系统用户', '更新商品状态', 1506676860),
 (1672, 4, 'winner', '后台系统用户', '更新商品状态', 1506677152),
 (1673, 4, 'winner', '后台系统用户', '登录了后台系统', 1506740880),
-(1674, 4, 'winner', '后台系统用户', '登录了后台系统', 1507598005);
+(1674, 4, 'winner', '后台系统用户', '登录了后台系统', 1507598005),
+(1675, 4, 'winner', '后台系统用户', '登录了后台系统', 1507685938),
+(1676, 4, 'winner', '后台系统用户', '登录了后台系统', 1508118923),
+(1677, 4, 'winner', '后台系统用户', '新增了商品分类', 1508119356),
+(1678, 4, 'winner', '后台系统用户', '新增了商品分类', 1508119489),
+(1679, 4, 'winner', '后台系统用户', '新增了商品分类', 1508119727),
+(1680, 4, 'winner', '后台系统用户', '修改了商品分类', 1508122719),
+(1681, 4, 'winner', '后台系统用户', '新增了商品分类', 1508122733),
+(1682, 4, 'winner', '后台系统用户', '新增了商品分类', 1508122748),
+(1683, 4, 'winner', '后台系统用户', '新增了商品分类', 1508122762),
+(1684, 4, 'winner', '后台系统用户', '更新商品基本信息', 1508133578),
+(1685, 4, 'winner', '后台系统用户', '修改了商品分类', 1508137920),
+(1686, 4, 'winner', '后台系统用户', '修改了商品分类', 1508137949),
+(1687, 4, 'winner', '后台系统用户', '更新商品基本信息', 1508138535),
+(1688, 4, 'winner', '后台系统用户', '更新商品基本信息', 1508138557),
+(1689, 4, 'winner', '后台系统用户', '新增了商品', 1508139838),
+(1690, 4, 'winner', '后台系统用户', '删除商品', 1508140628),
+(1691, 4, 'winner', '后台系统用户', '新增了商品', 1508140645),
+(1692, 4, 'winner', '后台系统用户', '删除商品', 1508140649),
+(1693, 30, '13452636973', '网站会员', '登录了网站', 1508141449),
+(1694, 4, 'winner', '后台系统用户', '登录了后台系统', 1508203885),
+(1695, 4, 'winner', '后台系统用户', '新增了商品', 1508204057),
+(1696, 4, 'winner', '后台系统用户', '删除商品', 1508211292),
+(1697, 4, 'winner', '后台系统用户', '新增了商品', 1508228558),
+(1698, 4, 'winner', '后台系统用户', '登录了后台系统', 1508289370),
+(1699, 4, 'winner', '后台系统用户', '更新商品排序', 1508289396);
 
 -- --------------------------------------------------------
 

@@ -26,7 +26,12 @@ class Exshop extends HomeBase
 		$this->assign('banner',Db::name('ads_items')->where('ad_id',6)->select());
 		//轮播图实例化
 		
-		$class=$this->getTree();
+		$cate=$this->getTree();
+		foreach($cate as $v){
+			if($v['id']=='62'){
+				$class[]=$v;
+			}
+		}
 		$this->assign('class',$class);
 		//分类列表
 		

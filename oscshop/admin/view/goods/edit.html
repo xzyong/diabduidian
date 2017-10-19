@@ -105,12 +105,18 @@
 					<div class="form-group required">
 						<label class="col-sm-2 control-label" for="input-meta-title2">购买可得兑换券：</label>
 						<div class="col-sm-6">
-						<select style="width:100px;" name="points">
+						<!-- <select style="width:100px;" name="points">
 						<option value="52">52张</option>
 						<option value="12">12张</option>
-						</select>
-					
+						</select> -->
+							<span id="fol-sm-s">
+								<span style='line-height:35px;'>每月&nbsp;
+									<span style='color:red;'> 0 </span>&nbsp;积分&nbsp;&nbsp;总共&nbsp;
+									<span style='color:red;'> 0 </span>&nbsp;积分
+								</span>
+							</span>
 						</div>
+						<input name="points" value="" type="hidden">
 					</div>
 					
 					<!--<div class="form-group required">-->
@@ -209,25 +215,25 @@
 					</div>
 				</div>
 			</div>
-		            <div class="form-group">
-						<label class="col-sm-2 control-label">商品状态：</label>
-						<div class="col-sm-10">
-							<label class="radio-inline">
-							<input type="radio" checked="checked" value="1" name="status">启用</label>
-							<label class="radio-inline">
-							<input type="radio" value="2" name="status">停用</label>
-						</div>
-					</div>
-					<div class="form-group required">
-						<label class="col-sm-2 control-label" for="input-meta-title2">商品所属分类：</label>
-						<div class="col-sm-6">
-							<select id="goods_category" name="goods_category">
-							{volist name="cate" id="ct"}
-								<option value="{$ct.id}">{$ct.name}</option>
-							{/volist}
-							</select>
-						</div>
-					</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">商品状态：</label>
+				<div class="col-sm-10">
+					<label class="radio-inline">
+					<input type="radio" checked="checked" value="1" name="status">启用</label>
+					<label class="radio-inline">
+					<input type="radio" value="2" name="status">停用</label>
+				</div>
+			</div>
+			<div class="form-group required">
+				<label class="col-sm-2 control-label" for="input-meta-title2">商品所属分类：</label>
+				<div class="col-sm-6">
+					<select id="goods_category" name="goods_category">
+					{volist name="cate" id="ct"}
+						<option value="{$ct.id}">{$ct.name}</option>
+					{/volist}
+					</select>
+				</div>
+			</div>
 		             <!-- <div class="form-group required">
 						<label class="col-sm-2 control-label" for="input-meta-title2">商品所在地区：</label>
 						<div class="col-sm-6">
@@ -393,7 +399,6 @@
 	          	</div>
 	          	<!-- 商品相册 END -->
 	          	
-	          	
 	          	<!-- 手机端描述 START -->
 	          	<div class="tab-pane" id="tab-mobile">
 	          		<div class="table-responsive">
@@ -423,7 +428,17 @@
 
 <script src="__PUBLIC__/js/ckeditor/ckeditor.js"></script> 
 <script>
-
+$("input[name='price']").change(function(){
+		var nb=$(this).val();
+		var ro=/(^[1-9]\d*$)/;
+		if(ro.test(nb)){
+			nb=nb/12;
+			nb=Math.round(nb);
+			num=nb*12;
+				$("#fol-sm-s").html("<span style='line-height:35px;'>每月&nbsp<span style='color:red;'>" + nb + "</span>&nbsp积分&nbsp&nbsp总共&nbsp<span style='color:red;'>" + num + "</span>&nbsp积分</span>");
+				$("input[name='points']").val(num);
+		}
+	});
 $('#send').click(function(){
 	
 	var name=$('input[name="name"]').val();

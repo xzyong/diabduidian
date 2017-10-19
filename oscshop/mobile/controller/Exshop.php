@@ -20,7 +20,8 @@ class Exshop extends MobileBase
     public function index()
     {
 		$this->assign('empty', '~~暂无数据');
-        $this->assign('banner', Db::name('ads_items')->where('ad_id',2)->select());
+        //$this->assign('banner', Db::name('ads_items')->where('ad_id',2)->select());
+		$this->assign('banner',Db::name('ads_items')->where('ad_id',6)->select());
 		$this->assign('list',array_chunk( Db::name('goods')->where(['is_points_goods'=>1,'status'=>1])->order('goods_id desc')->limit(10)->select(),2));
 		$this->assign('cate',Db::name('category')->select());
 		$this->assign('SEO',['title'=>config('SITE_TITLE'),'keywords'=>config('SITE_KEYWORDS'),'description'=>config('SITE_DESCRIPTION')]);

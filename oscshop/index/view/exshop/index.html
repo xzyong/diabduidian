@@ -810,16 +810,13 @@
 			<!-- 全部商品分类 -->
             <span class="category-layer-bg"></span>
 		   <!-- 一级循环开始 -->
-			<?php foreach($class as $k=>$v){?>
+			<?php foreach($class as $v){?>
+			<?php foreach($v['child'] as $k=>$v){?>
             <div class="list">
                 <dl class="cat">
                     <dt class="cat-name">
                         <i class="iconfont"></i>
-						{if condition="($v['name']=='商品入会')"}
-                        <a href="{:url('Exproduct/me_index',['id'=>$v['id']])}" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
-						{else}
 						<a href="{:url('Exproduct/index',['id'=>$v['id']])}" target="_blank" title="<?php echo $v['name'];?>"><?php echo $v['name'];?></a>
-						{/if}
                     </dt>
                     <i class="right-arrow">&gt;</i>
                 </dl>
@@ -840,31 +837,16 @@
 							<!--二级循环开始-->
 							<?php foreach($v['child'] as $vo){?>
                             <dl class="fore1">
-								{if condition="($v['name']=='商品入会')"}
-								<dt style="width: 2em;">
-                                    <a href="{:url('Exproduct/me_index','id='.$vo['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
-                                        <em><?php echo $vo['name'];?></em>
-                                        <i>&gt;</i>
-                                    </a>
-                                </dt>
-								{else}
                                 <dt style="width: 2em;">
                                     <a href="{:url('Exproduct/index','id='.$vo['id'])}" target="_blank" title="<?php echo $vo['name'];?>">
                                         <em><?php echo $vo['name'];?></em>
                                         <i>&gt;</i>
                                     </a>
                                 </dt>
-								{/if}
 								<?php foreach($vo['child'] as $br){?>
-								{if condition="($v['name']=='商品入会')"}
-								<dd>
-                                    <a href="{:url('Exproduct/me_index','id='.$br['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
-                                </dd> 
-								{else}
 								<dd>
                                     <a href="{:url('Exproduct/index','id='.$br['id'])}" target="_blank" title="<?php echo $br['name'];?>"><?php echo $br['name'];?></a>
-                                </dd> 
-								{/if}
+                                </dd>
 								<?php }?>
                             </dl>
 							<?php }?>
@@ -882,17 +864,17 @@
                             </div>
                         </div>
                         <!-- 分类广告图片 -->
-						<?php foreach($v['child'] as $vo){?>
+						<?php foreach($vo['child'] as $li){?>
                         <div class="item-promotions">
                             <a href="javascript:;" target="_blank" class="img-link">
-                                <img src="__UPLOADS__/{$vo['image']}" width="180">
+                                <img src="__UPLOADS__/{$li['image']}" width="180">
                             </a>
                         </div>
 						<?php }?>
                     </div>
                 </div>
             </div>
-			<?php }?>
+			<?php }}?>
            <!--END-->
         </div>
 				<!-- 带有二级分类的分类导航 _start -->

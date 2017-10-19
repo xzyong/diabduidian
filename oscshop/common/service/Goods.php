@@ -330,12 +330,7 @@ class Goods{
 		if(!$goods=Db::name('goods')->alias('g')->join('goods_description gd','g.goods_id = gd.goods_id')->where('g.goods_id',$goods_id)->find()){
 			return false;
 		}
-		if($goods['is_points_goods']==0){
-			$good=Db::name('goods')->alias('g')->join('goods_area a','a.id=g.location')->join('goods_description gd','g.goods_id = gd.goods_id')->where('g.goods_id',$goods_id)->find();
-		}else{
 			$good=Db::name('goods')->alias('g')->join('goods_description gd','g.goods_id = gd.goods_id')->where('g.goods_id',$goods_id)->find();
-		}
-
 		return [
 			'goods'=>$good,
 			'image'=>Db::name('goods_image')->where('goods_id',$goods_id)->limit(4)->select(),

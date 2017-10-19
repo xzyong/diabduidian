@@ -1,6 +1,6 @@
 <div class="all-nav-box">
     <div class="container">
-        <a href="">首页</a> &gt; <a href="">百货</a>&gt;<a href="">其他</a>&gt;{$goods.name}
+        <a href="">首页</a>&gt;<a href="">限时特价入会</a>&gt;{$goods.name}
     </div>
 </div>
 <div class="details_product">
@@ -62,7 +62,7 @@
                     <!--                    <div class="Xcontent28"><img  src="__PUBLIC__/pc/img/shangpinxiangqing/X14.png"></div>-->
                     <!--                    <div class="Xcontent29"><img  src="__PUBLIC__/pc/img/shangpinxiangqing/X1.png"></div>-->
                     <!--                </div>-->
-                    <p class="Xcontent-p">所属地区：{$goods.area_name} <span>运费:到付/自提</span></p>
+                    <!-- <p class="Xcontent-p">所属地区： <span>运费:到付/自提</span></p> -->
 
                     <form action="{:url('Cart/member_shop')}" method="post">
                         <div class="Xcontent30">
@@ -280,7 +280,8 @@
                     }
                 })
     });
-    $('#gouwuche').bind('click', function() {
+    //购物车
+	$('#gouwuche').bind('click', function() {
 
 //        alert($('#goods_id').val());
         $.post(
@@ -295,6 +296,7 @@
                 }
         )
     });
+	//收藏，关注
     $('.shoucang a').click(function(){
 //        alert($('#goods_id').val());
         var id=$(this).find('p').attr('id');
@@ -313,6 +315,7 @@
                 }
         );
     });
+	//评论→更多
     $('#more').click(function(){
         $(this).hide();
         var length = $('.pl').length-1;

@@ -19,15 +19,14 @@ use think\Db;
 class Goods extends HomeBase
 {
     public function index()
-    {   
+    {
 		$id=input('param.id');
 		$status=Db::name('goods')->where('goods_id',$id)->field('status')->find();
 		//dump($status);die;
-    	if($status['status']==1){
-			
-		 if(!$list=osc_goods()->get_goods_info((int)input('param.id'))){
+    	if(!$list=osc_goods()->get_goods_info((int)input('param.id'))){
 		 	$this->error('商品不存在！！');
-		 }
+		 }//dump($list['goods']);die;
+		if($status['status']==1){
 		  if ($list['goods']['end_time']!==NULL) {
              if ( strtotime($list['goods']['end_time'])<time() ) {
                $list['goods']['end_time']=1;
@@ -35,24 +34,24 @@ class Goods extends HomeBase
                 $list['goods']['end_time']=strtotime($list['goods']['end_time'])*1000;
              }
            }
-		$comment=Db::name('goods_comment')->where(['goods_id'=>input('param.id'),'status'=>1])->order('id desc')->limit(2)->select();
-		foreach($comment as $key=>$v){
+			$comment=Db::name('goods_comment')->where(['goods_id'=>input('param.id'),'status'=>1])->order('id desc')->limit(2)->select();
+			foreach($comment as $key=>$v){
 			$comment[$key]['phone']=substr_replace($v['phone'],'*********',1,9);
-		}
-		$this->assign('count',Db::name('goods_comment')->where(['goods_id'=>input('param.id'),'status'=>1])->count());
-		$this->assign('comment',$comment);
-		$this->assign('SEO',['title'=>$list['goods']['name'].'-'.config('SITE_URL').'-'.config('SITE_TITLE'),
-		'keywords'=>$list['goods']['meta_keyword'],
-		'description'=>$list['goods']['meta_description']]);
-		$good = GoodsModel::get((int)input('param.id'));
-		$good->updateViewed();
-		$this->assign('list',Db::name('goods_attribute')->alias('a')->where('a.goods_id',input('param.id'))->join('attribute_value w','a.attribute_value_id = w.attribute_value_id')->select());
-		$this->assign('collect',Db::name('collect')->where(['uid'=>member('uid'),'goods_id'=>$list['goods']['goods_id'],'is_points_goods'=>0])->find());
-		$this->assign('goods',$list['goods']);
-		$this->assign('image',$list['image']);
-		$this->assign('list4',$this->sell(4));
-		$this->assign('empty','&nbsp;&nbsp;&nbsp;&nbsp;暂时还没有人评论!');
-		return $this->fetch();
+			}
+			$this->assign('count',Db::name('goods_comment')->where(['goods_id'=>input('param.id'),'status'=>1])->count());
+			$this->assign('comment',$comment);
+			$this->assign('SEO',['title'=>$list['goods']['name'].'-'.config('SITE_URL').'-'.config('SITE_TITLE'),
+			'keywords'=>$list['goods']['meta_keyword'],
+			'description'=>$list['goods']['meta_description']]);
+			$good = GoodsModel::get((int)input('param.id'));
+			$good->updateViewed();
+			$this->assign('list',Db::name('goods_attribute')->alias('a')->where('a.goods_id',input('param.id'))->join('attribute_value w','a.attribute_value_id = w.attribute_value_id')->select());
+			$this->assign('collect',Db::name('collect')->where(['uid'=>member('uid'),'goods_id'=>$list['goods']['goods_id'],'is_points_goods'=>0])->find());
+			$this->assign('goods',$list['goods']);
+			$this->assign('image',$list['image']);
+			$this->assign('list4',$this->sell(4));
+			$this->assign('empty','&nbsp;&nbsp;&nbsp;&nbsp;暂时还没有人评论!');
+			return $this->fetch();
 		}else{
 			$this->error('非常抱歉，您访问的商品已下架，您可以查看其它商品，给您带来不便非常抱歉。');
 		}
@@ -66,7 +65,7 @@ class Goods extends HomeBase
     		}else{
     			return false;
     		}
-    	}	
+    	}
     }
 
 

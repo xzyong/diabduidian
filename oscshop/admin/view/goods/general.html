@@ -103,6 +103,18 @@
 							<input id="input-meta-title2" class="form-control" type="text" placeholder="商品数量" value="{$goods.quantity}" name="quantity">
 						</div>
 					</div>
+					<div class="form-group required">
+						<label class="col-sm-2 control-label" for="input-meta-title2">购买可得兑换券：</label>
+						<div class="col-sm-6">
+							<span id="fol-sm-s">
+								<span style='line-height:35px;'>每月&nbsp;
+									<span style='color:red;'> 0 </span>&nbsp;积分&nbsp;&nbsp;总共&nbsp;
+									<span style='color:red;'> 0 </span>&nbsp;积分
+								</span>
+							</span>
+						</div>
+						<input name="points" value="" type="hidden">
+					</div>
       
 
 			<div class="form-group">
@@ -305,14 +317,25 @@
 {block name="javascript"}
 <script src="__PUBLIC__/js/ckeditor/ckeditor.js"></script>
 <script>
+$("input[name='price']").change(function(){
+alert('123');
+		int nb=$(this).val();
+		var ro=/(^[1-9]\d*$)/;
+		if(ro.test(nb)){
+			nb=nb/12;
+			nb=Math.round(nb);
+			num=nb*12;
+				$("#fol-sm-s").html("<span style='line-height:35px;'>每月&nbsp<span style='color:red;'>" + nb + "</span>&nbsp积分&nbsp&nbsp总共&nbsp<span style='color:red;'>" + num + "</span>&nbsp积分</span>");
+				$("input[name='points']").val(num);
+		}
+	});
 $(function(){
 	{if condition="$Request.param.id"}
 				Oscshop.setValue("status", {$goods.status|default=1});
 				Oscshop.setValue("subtract",{$goods.subtract|default=1});
 				Oscshop.setValue("shipping",{$goods.shipping|default=1});
-	{/if}
+	{\if}
 });
-
 $('#send').click(function(){
 
 	var name=$('input[name="name"]').val();
