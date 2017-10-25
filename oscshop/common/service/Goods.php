@@ -144,7 +144,7 @@ class Goods{
 				$query['category']=urlencode($filter['category']);
 				
 			}
-			#是否启用
+			#是否上架
 			if(isset($filter['status'])){
 				$where['status']=['eq',(int)$filter['status']];
 				$query['status']=urlencode($filter['status']);

@@ -50,9 +50,9 @@ class Mysql extends Connection
     public function getFields($tableName)
     {
         $this->initConnect(true);
-        list($tableName) = explode(' ', $tableName);
-        if (strpos($tableName, '.')) {
-            $tableName = str_replace('.', '`.`', $tableName);
+        list($tableName) = explode(' ', $tableName);//分割字符串为数组
+        if (strpos($tableName, '.')) {	//查找字符串首次出现的位置
+            $tableName = str_replace('.', '`.`', $tableName);	//替换字符串
         }
         $sql = 'SHOW COLUMNS FROM `' . $tableName . '`';
         // 调试开始

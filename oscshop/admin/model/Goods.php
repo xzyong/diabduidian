@@ -84,7 +84,6 @@ class Goods{
 		$goods['sort_order']=(int)$data['sort_order'];
 		$goods['date_added']=date('Y-m-d H:i:s',time());
 		$goods['postage'] = $data['postage'];
-		$goods['category_pid'] = $data['goods_category'];
 		
 		$goods_id=Db::name('goods')->insert($goods,false,true);
 
@@ -101,11 +100,11 @@ class Goods{
 
 				Db::name('goods_description')->insert($goods_description);
 
-				/* if (isset($data['goods_category'])) {
+				if (isset($data['goods_category'])) {
 					// dump($data['goods_category']);die;
 					$category_id=$data['goods_category'];
 						Db::name('goods_to_category')->insert(['category_id'=>$category_id,'goods_id'=>$goods_id]);
-				} */
+				}
 
 				if (isset($data['goods_attribute'])) {
 					foreach ($data['goods_attribute'] as $attribute_id) {

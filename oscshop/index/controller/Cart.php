@@ -153,7 +153,7 @@ class Cart extends HomeBase
 		}
 		if (request()->isPost()) {
 			$data = input('post.');
-
+//dump($data);die;
 			$list=Db::name('goods')->where('goods_id',$data['goods_id'])->find();
 			if ($list['is_points_goods']==0) {
 				$this->assign('type','money');

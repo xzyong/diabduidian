@@ -55,12 +55,22 @@
                         <h3 class="title">
                             <a href="{:url('/goods/'.$li['goods_id'])}"> {$li.name}</a>
                         </h3>
-						<p class="money">
-                            ￥{$li.price}
-                        </p>
-                        <p class="money" style="color:#999;">
-                            ￥{$li.origin_price}
-                        </p>
+						{if condition="$li.price!==$li.origin_price"}
+							<p class="money">
+								￥{$li.price}
+							</p>
+							<p class="money" style="color:#999;">
+								<del>￥{$li.origin_price}</del>
+							</p>
+						{/if}
+						{if condition="$li.price==$li.origin_price"}
+							<p class="money">
+								￥{$li.price}
+							</p>
+							<p class="money" style="color:#999;">
+								非秒杀商品
+							</p>
+						{/if}
                         <div class="button">
                             <div class="row">
                                 <div class="col-xs-6" >

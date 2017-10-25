@@ -78,10 +78,10 @@
 
         });
     });
+	//点击支付
     $('#pay').click(function(){
         var type=$('input:checked').attr('id');
         var id=$(this).attr('data-id');
-
             $.post(
                     "{:url('payment/Payment/re_pay')}",
                     {
@@ -104,7 +104,7 @@
                     }
             );
 
-    })
+    });
 </script>
 
 </body>

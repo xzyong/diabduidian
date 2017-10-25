@@ -284,13 +284,13 @@ class Exproduct extends HomeBase
 
         if (input('param.id') && input('param.cate_id')) {
             $title = Db::name('category')->where('id', input('param.id'))->find();
-            $list = osc_goods()->getGoodslist(['category_pid' => input('param.cate_id'), 'status' => 1,'end_time'=>['>',date('Y-m-d,H-i-s')],], 'goods_id desc', 8);
+            $list = osc_goods()->getGoodslist(['category_pid' => input('param.cate_id'), 'status' => 1,], 'goods_id desc', 8);
             $this->assign('cate','');
             $father = osc_goods()->get_category_father(input('param.id'));
             $this->assign('father', $father);
             $this->assign('ptitle', $title['name']);
         }elseif (input('param.id') && !input('param.cate_id')){
-			$list=Db::name('goods')->where('is_points_goods','0')->where('end_time','>',date('Y-m-d,H-i-s'))->order('goods_id desc')->paginate(config('page_num'));
+			$list=Db::name('goods')->where('is_points_goods','0')->where('status',1)->order('goods_id desc')->paginate(8);
             $father = osc_goods()->get_category_father(input('param.id'));
             $this->assign('father', $father);
 			$class=$this->getTree();
@@ -303,7 +303,7 @@ class Exproduct extends HomeBase
 			}
             $this->assign('cate', $cate);
         }
-        $lis = array();
+		/* $lis = array();
         foreach ($list as $key => $v) {
             if ($v['end_time'] !== NULL) {
                 $lis[$key] = $v;
@@ -311,7 +311,7 @@ class Exproduct extends HomeBase
                     $lis[$key]['end_time'] = 1;
                 }
             }
-        }
+        } */
 		
 
 
@@ -323,7 +323,7 @@ class Exproduct extends HomeBase
         $this->assign('SEO', ['title' => '入会商品列表 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
 
         $this->assign('empty', '<div class="list-content" style="width: 500px; height: 500px">非常抱歉，暂时还没有信息，如有问题请联系客服</div>');
-        $this->assign('goodlist', $lis);
+        $this->assign('goodlist', $list);
 		//入会商品
 		//dump($lis);die;
         return $this->fetch();

@@ -59,17 +59,18 @@ class Payment extends Base{
 	function re_pay(){
 		if(request()->isPost()){
 		
-			$type=input('param.type');
+			$type=input('param.type');#获取提交的数据:type
 			
 			$class = '\\osc\\payment\\controller\\' . ucwords($type);
+				#拼接字符串 type:weixin/alipay 只有两个选项
 				
-			$payment= new $class();
+			$payment= new $class();	//实例化本身
 			
-			$return=$payment->re_pay(input('post.id'));
+			$return=$payment->re_pay(input('post.id'));	//调用本身的re_pay方法，就是本身的方法
 
-			User::get_logined_user()->storage_user_action('点击了去支付');
+			User::get_logined_user()->storage_user_action('点击了去支付');	//记录当前动作
 			
-			return ['type'=>$return['type'],'pay_url'=>$return['pay_url']];
+			return ['type'=>$return['type'],'pay_url'=>$return['pay_url']];//返回值到调用的位置
 		
 		}
 	}

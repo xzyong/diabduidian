@@ -36,7 +36,6 @@ class Goods extends AdminBase{
 			
 		}else{
 			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(10);
-			//dump(Db::name('goods')->getLastSql());die;
 		}		
 
 		$this->assign('empty','<tr><td colspan="20">没有数据~</td></tr>');

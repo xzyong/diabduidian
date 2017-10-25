@@ -41,7 +41,7 @@ class Index extends HomeBase
 		
 		$this->assign('category',$category);
 		
-        $this->assign('list1',$this->sel('0',4,'sort_order'));
+        $this->assign('list1',$this->sel('0',2,'sort_order'));
 		//限时特价查询语句
 		
         $this->assign('list4',$this->sell(4));

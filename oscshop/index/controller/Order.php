@@ -90,7 +90,6 @@ class Order extends HomeBase
 	public function order_now(){
 		if (request()->isPost()) {
 			$post = input('post.');
-			// var_dump($post);die;
 			$address = Db::name('address')->where(['address_id'=>$post['address_id']])->find();
 			$arr['comment']   = $post['comment'];
 			if ($post['type']=='money') {
@@ -149,12 +148,12 @@ class Order extends HomeBase
 	/*由于微信发起支付的路径只能有三个，为了节省用，将所有order定单里发起支付的页面全指向了这一个页面*/
 	function pay(){
 
-$order = OrderModel::get(['order_id'=>(int)input('order_id')]);
+		$order = OrderModel::get(['order_id'=>(int)input('order_id')]);
 
 		$this->assign('SEO',['title'=>'支付 - '.'点对点商城']);
 
 		$this->assign('order',$order);
-
+		//dump($order);die;
 
 
 
