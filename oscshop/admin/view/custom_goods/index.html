@@ -23,17 +23,9 @@
 		<th>    				
 			<select name="category">
 				<option value="all">全部分类</option>			
-				<?php $input_cid=input('category'); ?>
-				
+				<?php $input_cid=input('category'); ?>				
 				{volist name="category" id="cat"}
-					{if condition="$cat['name']=='商品兑换'"}
-						{volist name="$cat['child']" id="catv"}
-							<option {if condition="$input_cid eq $catv['id']"} selected="selected"{/if} value="{$catv.id}">{$catv.name}</option>
-							{volist name="$catv['child']" id="vo"}
-								<option {if condition="$input_cid eq $vo['id']"} selected="selected"{/if} value="{$vo.id}">└{$vo.name}</option>
-							{/volist}
-						{/volist}
-					{/if}
+					<option {if condition="$input_cid eq $cat['id']"} selected="selected"{/if} value="{$cat.id}">{$cat.name}</option>
 				{/volist}
 				
 			</select>

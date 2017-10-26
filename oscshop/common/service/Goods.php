@@ -65,7 +65,7 @@ class Goods{
 	 * 根据条件取得商品列表(goods表连接goods_to_category表)
 	 * @param array $filter 条件
 	 * @param string $page_num 数据量
-	 * @param string $field 取出字段
+	 * @param string $field 查询字段
 	 * *@param string $is_points_goods 判断商品类型
 	 * @return object(think\paginator\Collection) 
 	 */
@@ -73,37 +73,70 @@ class Goods{
 		
 		$map=[];
 		$query=[];
+		if($filter['category']!=='all'){
+			
 		
-		if(isset($filter['type'])){
-			$query['type']=urlencode($filter['type']);	
-		}
-		//名称筛选
-		if(isset($filter['name'])){
-			$map['g.name']=['like',"%".$filter['name']."%"];	
-			$query['name']=urlencode($filter['name']);	
-		}
-		//后台台分类商品搜索
-		if(isset($filter['category'])){
-			$map['gtc.category_id']=['eq',(int)$filter['category']];	
-			$query['category']=urlencode($filter['category']);		
-		}
-		//前台分类商品搜索
-		if(isset($filter['id'])){
-			$map['gtc.category_id']=['eq',(int)$filter['id']];	
-		}
-		$map['g.is_points_goods']=['eq',(int)$is_points_goods];
-		//状态筛选
-		if(isset($filter['status'])){	
-			$map['g.status']=['eq',(int)$filter['status']];	
-			$query['status']=urlencode($filter['status']);
+			if(isset($filter['type'])){
+				$query['type']=urlencode($filter['type']);	
+			}
+			//名称筛选
+			if(isset($filter['name'])){
+				$map['g.name']=['like',"%".$filter['name']."%"];	
+				$query['name']=urlencode($filter['name']);	
+			}
+			//后台台分类商品搜索
+			if(isset($filter['category'])){
+				$map['gtc.category_id']=['eq',(int)$filter['category']];	
+				$query['category']=urlencode($filter['category']);		
+			}
+			//前台分类商品搜索
+			if(isset($filter['id'])){
+				$map['gtc.category_id']=['eq',(int)$filter['id']];	
+			}
+			$map['g.is_points_goods']=['eq',(int)$is_points_goods];
+			//状态筛选
+			if(isset($filter['status'])){
+				$map['g.status']=['eq',(int)$filter['status']];	
+				$query['status']=urlencode($filter['status']);
+			}/* else{
+				$map['g.status']=['eq',1];	
+			} */
+			$map['is_auction']=0;
+			return Db::name('goods')->alias('g')->field($field)		
+			->join('goods_to_category gtc','g.goods_id = gtc.goods_id')
+			->where($map)->order('g.goods_id desc')
+			->paginate($page_num,false,['query'=>$query]);
 		}else{
-			$map['g.status']=['eq',1];	
+			if(isset($filter['type'])){
+				$query['type']=urlencode($filter['type']);	
+			}
+			//名称筛选
+			if(isset($filter['name'])){
+				$map['name']=['like',"%".$filter['name']."%"];	
+				$query['name']=urlencode($filter['name']);	
+			}
+			//后台台分类商品搜索
+			if(isset($filter['category'])){
+				//$map['category_id']=['eq',(int)$filter['category']];	
+				$query['category']=urlencode($filter['category']);		
+			}
+			//前台分类商品搜索
+			/* if(isset($filter['id'])){
+				$map['category_id']=['eq',(int)$filter['id']];	
+			} */
+			$map['is_points_goods']=['eq',(int)$is_points_goods];
+			//状态筛选
+			if(isset($filter['status'])){
+				$map['status']=['eq',(int)$filter['status']];	
+				$query['status']=urlencode($filter['status']);
+			}/* else{
+				$map['g.status']=['eq',1];	
+			} */
+			$map['is_auction']=0;
+			return Db::name('goods')->field($field)
+			->where($map)->order('goods_id desc')
+			->paginate($page_num,false,['query'=>$query]);
 		}
-		$map['is_auction']=0;
-		return Db::name('goods')->alias('g')->field($field)		
-		->join('goods_to_category gtc','g.goods_id = gtc.goods_id')
-		->where($map)->order('g.goods_id desc')
-		->paginate($page_num,false,['query'=>$query]);
 	}
 	
 	public function goods_category_search($filter,$getTree,$is,$pad){
@@ -365,12 +398,12 @@ static function get_recommend_arr($type=1,$num=6,$attr=5){
 	}
 
 	public function getGoodslists($where,$order,$num,$lis){
-		$list=   Db::name('goods')->where('category_pid','in',$lis)->where($where)->order($order)->paginate($num);
+		$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where('w.category_id','in',$lis)->where($where)->order($order)->paginate($num);
 		return $list ;
 	}
 
 	public function getGoodslist($where,$order,$num){
-		$list=   Db::name('goods')->where($where)->order($order)->paginate($num);
+		$list=   Db::name('goods')->alias('a')->join('goods_to_category w','a.goods_id = w.goods_id')->where($where)->order($order)->paginate($num);
 		return $list ;
 	}
 	public function moretickect($where,$order,$num){

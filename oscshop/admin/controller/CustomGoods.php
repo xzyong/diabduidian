@@ -28,30 +28,25 @@ class CustomGoods extends GoodsBase{
 	public function index(){
 //		若有搜索参数就搜索
 		$filter=input('param.');
-		$category=osc_goods()->getTree();
+        
+		//dump($filter);die;
 		if(isset($filter['type'])&&$filter['type']=='search'){
-			//$list=osc_goods()->get_category_goods_list($filter,config('page_num'),1);
-			$is=1;
-			$list=osc_goods()->goods_category_search($filter,$category,$is);
-			
+			$list=osc_goods()->get_category_goods_list($filter,config('page_num'),1);
 		}else{
-			
-			//$list=Db::name('goods')->where('is_points_goods','1')->order('goods_id desc')->paginate(config('page_num'));
-			$list=Db::name('goods')->where('is_points_goods','1')->order('goods_id desc')->paginate(10);
-			
+			$list=Db::name('goods')->where('is_points_goods','1')->order('goods_id desc')->paginate(config('page_num'));
 		}
-		//$cate=[];
-		//dump($category);
-		/* foreach ($category as $key => $v) {
-			if ($v['pid']!==0 && $v['pid']!==37) {
+		$category=	osc_goods()->get_category_tree();
+		$cate=[];
+		foreach ($category as $key => $v) {
+			if ($v['pid']!==0 && $v['pid']!==61) {
 				$cate[$key] = $v;
 			}
-		} */
-			
-		//dump(Db::name('goods')->getLastSql());
+		}
+
 		$this->assign('empty','<tr><td colspan="20">没有数据~</td></tr>');
 		
-		$this->assign('category',$category);
+		$this->assign('category',$cate);
+		
 		$this->assign('list',$list);
 	
 		return $this->fetch();

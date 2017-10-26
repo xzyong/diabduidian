@@ -26,22 +26,19 @@ class Goods extends AdminBase{
 	//商品列表
     public function index(){
     	
+		
 		$filter=input('param.');
-		//dump($filter);die;
-        $category=osc_goods()->getTree();
+        
 		if(isset($filter['type'])&&$filter['type']=='search'){
-			
-			$is=0;
-			$list=osc_goods()->goods_category_search($filter,$category,$is,10);
-			
+			$list=osc_goods()->get_category_goods_list($filter,config('page_num'),0);
 		}else{
-			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(10);
+			$list=Db::name('goods')->where('is_points_goods','0')->order('goods_id desc')->paginate(config('page_num'));
 		}		
 
 		$this->assign('empty','<tr><td colspan="20">没有数据~</td></tr>');
 		
-		$this->assign('category',osc_goods()->getTree());
-	
+		$this->assign('category',Db::name('category')->field('id,pid,name')->where('pid','61')->select());
+		
 		$this->assign('list',$list);
 	
 		return $this->fetch();

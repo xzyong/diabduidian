@@ -98,16 +98,16 @@ class Exproduct extends HomeBase
                             switch (input('param.oid')) {
                                 case 1:
 
-                                    $lis = osc_goods()->getGoodslist(['status' => 1, 'category_pid' => input('param.id')], 'pay_points desc', 8);
+                                    $lis = osc_goods()->getGoodslist(['a.status' => 1, 'w.category_id' => input('param.id')], 'a.pay_points desc', 8);
                                     break;
                                 case 2:
-                                    $lis = osc_goods()->getGoodslist(['status' => 1, 'category_id' => input('param.id')], 'pay_points', 8);
+                                    $lis = osc_goods()->getGoodslist(['a.status' => 1, 'w.category_id' => input('param.id')], 'a.pay_points', 8);
                                     break;
                                 case 3:
-                                    $lis = osc_goods()->getGoodslist(['status' => 1, 'category_id' => input('param.id')], 'viewed desc', 8);
+                                    $lis = osc_goods()->getGoodslist(['a.status' => 1, 'w.category_id' => input('param.id')], 'a.viewed desc', 8);
                                     break;
                                 case 4:
-                                    $lis = osc_goods()->getGoodslist(['status' => 1, 'category_id' => input('param.id')], 'viewed', 8);
+                                    $lis = osc_goods()->getGoodslist(['a.status' => 1, 'w.category_id' => input('param.id')], 'a.viewed', 8);
                                     break;
                             }
                         } else {
@@ -120,17 +120,17 @@ class Exproduct extends HomeBase
 
                             switch (input('param.oid')) {
                                 case 1:
-                                    $lis = osc_goods()->getGoodslists(['status' => 1, 'is_points_goods' => 1], 'pay_points desc', 8, $li);
+                                    $lis = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.pay_points desc', 8, $li);
 									//dump($lis);die;
                                     break;
                                 case 2:
-                                    $lis = osc_goods()->getGoodslists(['status' => 1, 'is_points_goods' => 1], 'pay_points', 8, $li);
+                                    $lis = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.pay_points', 8, $li);
                                     break;
                                 case 3:
-                                    $lis = osc_goods()->getGoodslists(['status' => 1, 'is_points_goods' => 1], 'viewed desc', 8, $li);
+                                    $lis = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.viewed desc', 8, $li);
                                     break;
                                 case 4:
-                                    $lis = osc_goods()->getGoodslists(['status' => 1, 'is_points_goods' => 1], 'viewed', 8, $li);
+                                    $lis = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.viewed', 8, $li);
                                     break;
                             }
                         }
@@ -176,7 +176,7 @@ class Exproduct extends HomeBase
                     $title = Db::name('category')->where('id', input('param.id'))->find();
                     $this->assign('SEO', ['title' => '兑换商品列表 - ' . config('SITE_URL') . '-' . config('SITE_TITLE')]);
                     if (empty($goods)) {
-                        $list = osc_goods()->getGoodslist(['status' => 1, 'category_pid' => input('param.id')], 'goods_id desc', 8);
+                        $list = osc_goods()->getGoodslist(['a.status' => 1, 'w.category_id' => input('param.id')], 'a.goods_id desc', 8);
 						
                         $this->assign('ptitle', $title['name']);
                         $this->assign('father', $father);
@@ -187,11 +187,8 @@ class Exproduct extends HomeBase
                             $lis[$key] = $val['id'];
 
                         }
-						$list = osc_goods()->getGoodslists(['status' => 1, 'is_points_goods' => 1], 'goods_id desc', 8, $lis);
-						//dump(Db::name('goods')->getLastSql());die;
-						/* $getTree=osc_goods()->getTree();
-						$is='1';$pad='8';
-						$list=osc_goods()->goods_category_search($lis,$getTree,$is,$pad); */
+						$list = osc_goods()->getGoodslists(['a.status' => 1, 'is_points_goods' => 1], 'a.goods_id desc', 8, $lis);
+						
                         $this->assign('ptitle', $title['name']);
 
                         $this->assign('cate', $goods);
@@ -203,8 +200,6 @@ class Exproduct extends HomeBase
         }
 
 
-		
-		//dump(osc_goods()->getLastSql());die;
         $this->assign('id', input('param.id'));
         $this->assign('mun', count($list));
 		//合计
